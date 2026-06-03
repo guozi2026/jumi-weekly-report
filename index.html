@@ -706,19 +706,43 @@ function renderPreview(data) {
   const html = `
 <div style="background:#f2ede8">
 <div class="cover" style="background:linear-gradient(160deg,#fff8f0,#fde8d0,#f8d0b0);border-radius:24px 24px 0 0;padding:32px 24px 24px;text-align:center;overflow:hidden;position:relative">
-  <div style="width:80px;height:80px;margin:0 auto 10px;background:linear-gradient(135deg,#ffe8d0,#fff0e0);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 4px 20px rgba(240,180,140,.35)">
-    <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="26" cy="28" rx="18" ry="16" fill="#FFDAB9"/>
-      <circle cx="26" cy="12" r="12" fill="#FFE4C9"/>
-      <ellipse cx="26" cy="32" rx="14" ry="12" fill="#FFE0C0"/>
-      <ellipse cx="20" cy="10" rx="3.5" ry="4" fill="#4A3020"/>
-      <ellipse cx="32" cy="10" rx="3.5" ry="4" fill="#4A3020"/>
-      <circle cx="21" cy="9" r="1.2" fill="#fff"/>
-      <circle cx="33" cy="9" r="1.2" fill="#fff"/>
-      <ellipse cx="26" cy="15" rx="4" ry="3" fill="#FFB5A0"/>
-      <path d="M22 17 Q26 21 30 17" stroke="#E8A090" stroke-width="1" fill="none" stroke-linecap="round"/>
-      <circle cx="18" cy="22" r="5" fill="#FFCAB5" opacity=".5"/>
-      <circle cx="34" cy="22" r="5" fill="#FFCAB5" opacity=".5"/>
+  <div style="width:100px;height:100px;margin:0 auto 12px;background:linear-gradient(135deg,#faf5f0,#f5ece0);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 8px 32px rgba(180,160,140,.2)">
+    <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- 月亮背景 -->
+      <path d="M48 12 C38 12 30 20 30 32 C30 44 38 52 48 52 C44 48 42 42 42 36 C42 28 44 22 48 18 Z" fill="#E8D5C0" opacity="0.3"/>
+      <!-- 襁褓轮廓 -->
+      <ellipse cx="36" cy="46" rx="24" ry="14" fill="#F5EDE3" stroke="#C8B8A8" stroke-width="0.8"/>
+      <!-- 襁褓纹理线 -->
+      <path d="M18 44 Q24 42 30 44" stroke="#DDD0C0" stroke-width="0.6" fill="none"/>
+      <path d="M24 48 Q30 46 36 48" stroke="#DDD0C0" stroke-width="0.6" fill="none"/>
+      <path d="M38 44 Q44 42 54 46" stroke="#DDD0C0" stroke-width="0.6" fill="none"/>
+      <!-- 宝宝头部 -->
+      <circle cx="36" cy="30" r="11" fill="#FAF3EC" stroke="#C8B8A0" stroke-width="0.7"/>
+      <!-- 头发 -->
+      <path d="M27 25 Q30 21 36 20 Q42 21 45 25" stroke="#B8A080" stroke-width="0.6" fill="none" stroke-linecap="round"/>
+      <path d="M29 24 Q32 22 36 21.5 Q40 22 43 24" stroke="#C8B8A0" stroke-width="0.4" fill="none" stroke-linecap="round"/>
+      <!-- 睡眼 -->
+      <path d="M30 31 Q32 33 34 31" stroke="#A09078" stroke-width="0.7" fill="none" stroke-linecap="round"/>
+      <path d="M38 31 Q40 33 42 31" stroke="#A09078" stroke-width="0.7" fill="none" stroke-linecap="round"/>
+      <!-- 睫毛 -->
+      <path d="M31 32 L30.5 33.5" stroke="#A09078" stroke-width="0.4" fill="none" stroke-linecap="round"/>
+      <path d="M33 32 L33 33.5" stroke="#A09078" stroke-width="0.4" fill="none" stroke-linecap="round"/>
+      <path d="M39 32 L39 33.5" stroke="#A09078" stroke-width="0.4" fill="none" stroke-linecap="round"/>
+      <path d="M41 32 L41.5 33.5" stroke="#A09078" stroke-width="0.4" fill="none" stroke-linecap="round"/>
+      <!-- 小鼻子 -->
+      <ellipse cx="36" cy="33.5" rx="1.5" ry="1" fill="#E8D8C8"/>
+      <!-- 微笑 -->
+      <path d="M34 35.5 Q36 37 38 35.5" stroke="#C8B0A0" stroke-width="0.6" fill="none" stroke-linecap="round"/>
+      <!-- 腮红 -->
+      <circle cx="29" cy="33" r="3" fill="#F0D0C0" opacity="0.5"/>
+      <circle cx="43" cy="33" r="3" fill="#F0D0C0" opacity="0.5"/>
+      <!-- 小手露出襁褓 -->
+      <circle cx="22" cy="42" r="3.5" fill="#FAF3EC" stroke="#C8B8A0" stroke-width="0.5"/>
+      <circle cx="50" cy="42" r="3.5" fill="#FAF3EC" stroke="#C8B8A0" stroke-width="0.5"/>
+      <!-- 星星点缀 -->
+      <path d="M14 18 L15 20 L17 21 L15 22 L14 24 L13 22 L11 21 L13 20 Z" fill="#E8D8C0" opacity="0.6"/>
+      <path d="M58 14 L58.8 15.5 L60.5 16 L58.8 16.5 L58 18 L57.2 16.5 L55.5 16 L57.2 15.5 Z" fill="#E8D8C0" opacity="0.4"/>
+      <path d="M54 30 L54.5 31.2 L55.8 31.5 L54.5 31.8 L54 33 L53.5 31.8 L52.2 31.5 L53.5 31.2 Z" fill="#E8D8C0" opacity="0.3"/>
     </svg>
   </div>
   <div style="font-size:11px;color:#c08060;letter-spacing:3px;margin-bottom:8px">🍊 橘米月子中心</div>
