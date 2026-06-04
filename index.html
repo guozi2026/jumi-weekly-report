@@ -941,12 +941,12 @@ function toggleMs(el) {
   syncMilestones();
 }
 function syncMilestones() {
+  // 先同步到隐藏输入，再触发预览（避免 updatePreview 调 autoSelectMilestones 覆盖手动选择）
   const tags = document.querySelectorAll('#msTagGroup .ms-tag.active');
   const words = Array.from(tags).map(t => t.getAttribute('data-ms'));
-  updatePreview();
-  // 同步到隐藏输入
   const input = document.getElementById('manualMilestones');
   if (input) input.value = words.join(' · ');
+  updatePreview();
 }
 // 根据 autoMatchMilestones 结果自动预选里程碑标签
 function autoSelectMilestones(data) {
@@ -1050,8 +1050,11 @@ function autoMatchMilestones(data) {
 // ===== 预览引擎 =====
 function updatePreview() {
   const data = readFormData();
-  // 自动预选里程碑标签 + 合并手动选择
-  autoSelectMilestones(data);
+  // 首次加载时自动预选里程碑（已选标签不受影响）
+  const alreadySelected = ($('#manualMilestones').value || '').split(' · ').filter(s=>s.trim());
+  if (alreadySelected.length === 0) {
+    autoSelectMilestones(data);
+  }
   const manualMs = ($('#manualMilestones').value || '').split(' · ').filter(s=>s.trim());
   const ma = autoMatchMilestones(data);
   data.milestone = [...new Set([...manualMs, ...ma.rawTags])].join(' · ') || '本周平稳过渡 ✨';
