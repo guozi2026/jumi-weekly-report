@@ -187,6 +187,153 @@
     flex-shrink: 0;
   }
 
+  /* ===== 九宫格 ===== */
+  .grid-container {
+    display: none;
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  body.grid-mode .preview-wrap { display: none; }
+  body.grid-mode .grid-container { display: block; }
+  body.grid-mode .btn-grid { background: #e07b5a; color: #fff; border-color: #e07b5a; }
+  .grid-3x3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    padding: 8px;
+  }
+  /* 卡片通用 */
+  .gc {
+    aspect-ratio: 1;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 18px 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  /* 顶部小图标 - 手绘风圆形容器 */
+  .gc .gc-dot {
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 8px;
+    flex-shrink: 0;
+  }
+  .gc .gc-dot svg { width: 25px; height: 25px; }
+  /* 超大数字 */
+  .gc .gc-num {
+    font-size: 44px; font-weight: 800; line-height: 1;
+    letter-spacing: -1.5px;
+  }
+  .gc .gc-num-m {
+    font-size: 52px; font-weight: 800; line-height: 1;
+    letter-spacing: -1.5px;
+  }
+  .gc .gc-unit {
+    font-size: 15px; font-weight: 500; opacity: 0.6;
+  }
+  /* 主标签 */
+  .gc .gc-label {
+    font-size: 13px; font-weight: 600; letter-spacing: 1px;
+    margin-top: 6px;
+  }
+  /* 类比小字 */
+  .gc .gc-analogy {
+    font-size: 12px; font-weight: 500; margin-top: 3px;
+    padding: 3px 10px; border-radius: 20px;
+  }
+  /* 底部上下文 */
+  .gc .gc-context {
+    font-size: 10.5px; margin-top: 6px; opacity: 0.65;
+  }
+  /* 细装饰线 */
+  .gc .gc-line {
+    width: 24px; height: 1.5px; border-radius: 1px;
+    margin: 10px 0 6px; opacity: 0.25;
+  }
+  /* 封面卡 */
+  .gc .gc-name {
+    font-size: 26px; font-weight: 800; letter-spacing: -0.5px;
+  }
+  .gc .gc-week-tag {
+    font-size: 14px; font-weight: 600; padding: 3px 14px;
+    border-radius: 20px; margin-top: 6px;
+  }
+  .gc .gc-brand {
+    font-size: 13px; font-weight: 600; opacity: 0.75; margin-top: 10px;
+    letter-spacing: 2px;
+  }
+  /* 文字卡 */
+  .gc .gc-title {
+    font-size: 14px; font-weight: 700; letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+  .gc .gc-text {
+    font-size: 13px; line-height: 1.8; max-height: 100px; overflow: hidden;
+  }
+  /* 护理清单 */
+  .gc .gc-care-item {
+    font-size: 12px; line-height: 2; font-weight: 500;
+  }
+  .gc .gc-care-item .done { opacity: 0.6; }
+  /* 装饰小元素 */
+  .gc .gc-star {
+    position: absolute; opacity: 0.15; pointer-events: none;
+  }
+  .gc .gc-star.tl { top: 12px; left: 14px; }
+  .gc .gc-star.tr { top: 14px; right: 16px; font-size: 10px; }
+  .gc .gc-star.br { bottom: 16px; right: 18px; font-size: 14px; }
+  .btn-grid {
+    margin-left: 6px;
+    font-size: 12px;
+    background: #fff;
+    color: #a08060;
+    border: 1px solid #d8d0c8;
+    border-radius: 14px;
+    padding: 5px 14px;
+    cursor: pointer;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: all .2s;
+  }
+  .btn-grid:hover { background: #faf5f0; color: #e06030; border-color: #e0c0a0; }
+
+  /* ===== 收折切换 ===== */
+  .collapse-toggle {
+    position: absolute;
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 56px;
+    background: #fff;
+    border: 1px solid #e0d8ce;
+    border-left: none;
+    border-radius: 0 14px 14px 0;
+    cursor: pointer;
+    font-size: 14px;
+    color: #a09080;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all .3s;
+    box-shadow: 2px 0 8px rgba(0,0,0,.04);
+  }
+  .collapse-toggle:hover { background: #faf5f0; color: #6b4030; }
+  body.collapsed .left-panel { width: 0; min-width: 0; padding: 0; overflow: hidden; border: none; }
+  body.collapsed .collapse-toggle { position: fixed; right: auto; left: 8px; border: 1px solid #e0d8ce; border-radius: 14px; box-shadow: 0 2px 16px rgba(0,0,0,0.08); }
+  body.collapsed .right-panel { background: #f7f3ed; overflow-y: visible; height: auto; min-height: 100vh; padding: 0; display: block; }
+  body.collapsed .preview-wrap { margin: 20px auto; box-shadow: 0 4px 32px rgba(0,0,0,0.07); border-radius: 24px; overflow: hidden; }
+  body.collapsed.grid-mode .preview-wrap { display: none; }
+  body.collapsed.grid-mode .grid-container { display: block; padding: 16px; }
+  body.collapsed { overflow: auto; }
+
   .tip-empty {
     text-align: center;
     color: #b8a090;
@@ -224,12 +371,79 @@
   .kw-chip:hover {
     background: #e8d8ff;
   }
+  /* 独立标签自由组合 */
+  .kw-tags-container {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .kw-tag-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+  }
+  .kw-tag-label {
+    font-size: 9px;
+    color: #b8a090;
+    white-space: nowrap;
+    margin-right: 2px;
+    min-width: 56px;
+  }
+  .kw-tag {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 14px;
+    border: 1.5px solid #e8d8e0;
+    background: #faf7f5;
+    color: #8b7060;
+    cursor: pointer;
+    white-space: nowrap;
+    user-select: none;
+    transition: all 0.15s;
+  }
+  .kw-tag:hover {
+    border-color: #c8b0c0;
+    background: #f5f0f0;
+  }
+  .kw-tag.active {
+    background: linear-gradient(135deg,#f5f0ff,#ede0ff);
+    border-color: #c8a8e8;
+    color: #6040a0;
+    font-weight: 600;
+  }
+  /* 里程碑选择标签 */
+  .ms-tag {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 14px;
+    border: 1.5px solid #f0e0d0;
+    background: #fffaf6;
+    color: #8b7060;
+    cursor: pointer;
+    white-space: nowrap;
+    user-select: none;
+    transition: all 0.15s;
+  }
+  .ms-tag:hover {
+    border-color: #e0c0a0;
+    background: #fef8f2;
+  }
+  .ms-tag.active {
+    background: linear-gradient(135deg,#fff6ed,#ffe8d8);
+    border-color: #d89868;
+    color: #c87040;
+    font-weight: 600;
+  }
 </style>
 </head>
 <body>
-
-<div class="left-panel">
+<div class="left-panel" style="position:relative">
   <h2>🍊 宝贝成长周报模板</h2>
+  <div style="display:flex;align-items:center;gap:6px;position:absolute;right:36px;top:14px">
+    <button type="button" class="btn-grid" id="btnGrid" onclick="toggleGridMode()" title="切换九宫格朋友圈排版">⬜ 九宫格</button>
+  </div>
+  <button type="button" class="collapse-toggle" onclick="toggleCollapse()" title="收起表单，全屏预览">◀</button>
   <div class="left-subtitle">
     <span style="background:#40a870;color:#fff;border-radius:3px;padding:1px 5px;font-size:9px">📋 护理记录</span> = 手工记录表可提取
     <span style="background:#e07030;color:#fff;border-radius:3px;padding:1px 5px;font-size:9px">✏️ 客服填写</span> = 需手动补充
@@ -272,15 +486,21 @@
     <div class="form-section">
       <div class="form-section-title"><span class="section-icon">📏</span> 生长数据</div>
       <div class="field-row">
+        <span class="field-label">出生体重(g)</span>
+        <span class="field-source src-record">📋</span>
+        <input type="number" id="birthWeight" value="3200" min="1500" max="6000">
+        <span class="field-unit">g</span>
+      </div>
+      <div class="field-row">
         <span class="field-label">体重-周初(g)</span>
         <span class="field-source src-record">📋</span>
-        <input type="number" id="weightStart" value="3300" min="2000" max="6000">
+        <input type="number" id="weightStart" value="3100" min="2000" max="6000">
         <span class="field-unit">g</span>
       </div>
       <div class="field-row">
         <span class="field-label">体重-周末(g)</span>
         <span class="field-source src-record">📋</span>
-        <input type="number" id="weightEnd" value="3480" min="2000" max="6000">
+        <input type="number" id="weightEnd" value="5200" min="2000" max="6000">
         <span class="field-unit">g</span>
       </div>
       <div class="derived-row">
@@ -343,27 +563,39 @@
     <div class="form-section">
       <div class="form-section-title"><span class="section-icon">🍼</span> 喂养数据</div>
       <div class="field-row">
-        <span class="field-label" style="font-size:10px">每日哺乳量(ml)×7</span>
-        <span class="field-source src-record">📋</span>
-        <div class="days-row">
-          <div class="day-group"><span class="day-label">一</span><input type="number" class="small" id="feedD1" value="390"></div>
-          <div class="day-group"><span class="day-label">二</span><input type="number" class="small" id="feedD2" value="400"></div>
-          <div class="day-group"><span class="day-label">三</span><input type="number" class="small" id="feedD3" value="410"></div>
-          <div class="day-group"><span class="day-label">四</span><input type="number" class="small" id="feedD4" value="415"></div>
-          <div class="day-group"><span class="day-label">五</span><input type="number" class="small" id="feedD5" value="425"></div>
-          <div class="day-group"><span class="day-label">六</span><input type="number" class="small" id="feedD6" value="440"></div>
-          <div class="day-group"><span class="day-label">日</span><input type="number" class="small" id="feedD7" value="450"></div>
-        </div>
-      </div>
-      <div class="derived-row">
-        <span class="derived-label">⚡ 日均哺乳量</span>
-        <span class="derived-value" id="dailyFeedAvg">420ml</span>
+        <span class="field-label">喂养方式</span>
+        <span class="field-source src-manual">✏️</span>
+        <select id="feedingType" onchange="updatePreview()" style="flex:1;padding:6px 8px;border:1.5px solid #e8ddd5;border-radius:8px;background:#fff;color:#4a3020;font-size:13px">
+          <option value="breast">纯母乳</option>
+          <option value="mixed" selected>混合喂养</option>
+          <option value="formula">纯奶粉</option>
+        </select>
       </div>
       <div class="field-row">
-        <span class="field-label">母乳占比(%)</span>
-        <span class="field-source src-manual">✏️</span>
-        <input type="number" id="breastRatio" value="72" min="0" max="100">
-        <span class="field-unit">%</span>
+        <span class="field-label">日均母乳哺乳时长</span>
+        <span class="field-source src-record">📋</span>
+        <input type="number" id="breastDuration" value="240" min="0" step="10">
+        <span class="field-unit">分钟</span>
+      </div>
+      <div class="field-row">
+        <span class="field-label">日均母乳量</span>
+        <span class="field-source src-record">📋</span>
+        <input type="number" id="breastMilk" value="300" min="0">
+        <span class="field-unit">ml</span>
+      </div>
+      <div class="field-row">
+        <span class="field-label">日均配方乳量</span>
+        <span class="field-source src-record">📋</span>
+        <input type="number" id="formulaMilk" value="119" min="0">
+        <span class="field-unit">ml</span>
+      </div>
+      <div class="derived-row">
+        <span class="derived-label">⚡ 日均总奶量</span>
+        <span class="derived-value" id="dailyFeedTotal">419ml</span>
+      </div>
+      <div class="derived-row" id="breastRatioRow">
+        <span class="derived-label" id="autoBreastRatioLabel">⚡ 母乳占比</span>
+        <span class="derived-value" id="autoBreastRatio">71.6%</span>
       </div>
       <div class="field-row">
         <span class="field-label">日均排便(次)</span>
@@ -400,18 +632,37 @@
     <div class="form-section">
       <div class="form-section-title"><span class="section-icon">💬</span> 个性化内容</div>
       <div class="field-row" style="flex-direction:column;align-items:stretch">
-        <span style="font-size:11px;color:#6b4030;margin-bottom:4px">护士寄语 <span class="field-source src-manual">✏️</span></span>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap">
+          <span style="font-size:11px;color:#6b4030">护士寄语 <span class="field-source src-manual">✏️</span></span>
+          <select id="nurseTemplate" onchange="fillNurseTemplate(this.value)" style="font-size:10px;padding:3px 8px;border:1.5px solid #e8d8d0;border-radius:10px;background:#fefaf7;color:#6b4030;cursor:pointer;max-width:160px">
+            <option value="">📝 选模板快速填充 ↓</option>
+            <option value="jaundice">🌅 黄疸稳步下降</option>
+            <option value="cord">🎓 脐带顺利脱落</option>
+            <option value="feeding">🍼 奶量突破增长</option>
+            <option value="weight">⚖️ 体重达标喜讯</option>
+            <option value="newbie">🌱 新手快速适应</option>
+            <option value="fullbm">💧 全母乳达成纪念</option>
+            <option value="month">🎉 满月/出所庆祝</option>
+            <option value="skills">🌟 新技能解锁</option>
+            <option value="general">💕 综合成长喜讯</option>
+          </select>
+        </div>
         <textarea id="nurseNote" rows="2">小宝贝这周进步太明显了！黄疸降得很顺利，脐带也脱落了，喝奶量一天比一天多。妈妈坚持亲喂的决心超棒，宝宝都感受得到的💕</textarea>
       </div>
-      <div class="field-row" style="margin-top:8px">
-        <span class="field-label">本周里程碑</span>
-        <span class="field-source src-manual">✏️</span>
-        <input type="text" id="milestone" value="脐带今日脱落！" placeholder="如：脐带脱落">
+      <div class="field-row" style="margin-top:8px;align-items:flex-start">
+        <span class="field-label" style="margin-top:6px">本周里程碑</span>
+        <span class="field-source src-auto">⚡</span>
+        <div id="milestoneDisplay" style="flex:1;background:#faf7f4;border:1.5px solid #f0ece8;border-radius:10px;padding:8px 12px;font-size:12px;color:#6b4030;line-height:1.6;min-height:36px">
+          <span style="color:#b8a090">选择下方里程碑标签…</span>
+        </div>
       </div>
-      <div class="field-row">
-        <span class="field-label">达标成就</span>
-        <span class="field-source src-manual">✏️</span>
-        <input type="text" id="achievement" value="体重增长180g，黄疸值恢复正常" placeholder="如：体重增长达标">
+      <input type="hidden" id="manualMilestones" value="">
+      <div class="field-row" style="align-items:flex-start">
+        <span class="field-label" style="margin-top:6px">达标成就</span>
+        <span class="field-source src-auto">⚡</span>
+        <div id="achievementDisplay" style="flex:1;background:#faf7f4;border:1.5px solid #f0ece8;border-radius:10px;padding:8px 12px;font-size:12px;color:#6b4030;line-height:1.6;min-height:36px">
+          <span style="color:#b8a090">根据数据自动匹配…</span>
+        </div>
       </div>
       <div class="field-row" style="flex-direction:column;align-items:stretch;margin-top:4px">
         <span style="font-size:11px;color:#6b4030;margin-bottom:4px">下周预告(每行一条) <span class="field-source src-manual">✏️</span></span>
@@ -482,23 +733,62 @@
         </div>
         <textarea id="momHighlight" rows="2">纯母乳坚持7天！每天按时亲喂，深夜也从不落下。宝宝的黄疸能这么快降下来，都是妈妈的功劳！</textarea>
       </div>
-      <div class="field-row">
-        <span class="field-label">本周关键词</span>
-        <span class="field-source src-manual">✏️</span>
-        <input type="text" id="weekKeywords" value="黄疸退散 · 干饭达人 · 脐带毕业" placeholder="3个关键词，用 · 分隔">
-      </div>
-      <div style="font-size:10px;color:#b09080;padding:3px 110px 6px 0;margin-left:0">
-        <span style="font-size:10px;color:#b09080">快捷选择：</span>
-        <span class="kw-chip" onclick="fillKeyword(0)">黄疸退散·干饭达人·脐带毕业</span>
-        <span class="kw-chip" onclick="fillKeyword(1)">纯母乳·奶量自由·追奶成功</span>
-        <span class="kw-chip" onclick="fillKeyword(2)">解锁新技能·经验值+100·通关</span>
-        <span class="kw-chip" onclick="fillKeyword(3)">天使宝宝·吃睡规律·不费妈</span>
-        <span class="kw-chip" onclick="fillKeyword(4)">天使宝宝·每一顿都香·稳了</span>
-        <span class="kw-chip" onclick="fillKeyword(5)">母乳的味道·指尖的温度·软乎乎</span>
-        <span class="kw-chip" onclick="fillKeyword(6)">从手忙脚乱到单手抱娃·满分妈妈</span>
-        <span class="kw-chip" onclick="fillKeyword(7)">母乳觉醒·超能力加载·深夜雷达</span>
-        <span class="kw-chip" onclick="fillKeyword(8)">体重在回来·爱在溢出来·一切向好</span>
-        <span class="kw-chip" onclick="fillKeyword(9)">满月倒计时·变化惊人·感恩相遇</span>
+      <div class="field-row" style="flex-direction:column;align-items:stretch">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+          <span class="field-label">本周关键词</span>
+          <span class="field-source src-manual">✏️</span>
+          <span style="font-size:10px;color:#b09080">（点击标签自由组合，最多选6个）</span>
+        </div>
+        <input type="hidden" id="weekKeywords" value="黄疸退散 · 干饭达人 · 脐带毕业">
+        <div id="kwTags" class="kw-tags-container">
+          <div class="kw-tag-group">
+            <span class="kw-tag-label">👶 宝宝状态</span>
+            <span class="kw-tag active" data-kw="黄疸退散" onclick="toggleKw(this)">黄疸退散</span>
+            <span class="kw-tag" data-kw="脐带毕业" onclick="toggleKw(this)">脐带毕业</span>
+            <span class="kw-tag active" data-kw="干饭达人" onclick="toggleKw(this)">干饭达人</span>
+            <span class="kw-tag" data-kw="天使宝宝" onclick="toggleKw(this)">天使宝宝</span>
+            <span class="kw-tag" data-kw="解锁新技能" onclick="toggleKw(this)">解锁新技能</span>
+          </div>
+          <div class="kw-tag-group">
+            <span class="kw-tag-label">🍼 喂养成就</span>
+            <span class="kw-tag" data-kw="纯母乳" onclick="toggleKw(this)">纯母乳</span>
+            <span class="kw-tag" data-kw="奶量自由" onclick="toggleKw(this)">奶量自由</span>
+            <span class="kw-tag" data-kw="追奶成功" onclick="toggleKw(this)">追奶成功</span>
+            <span class="kw-tag" data-kw="母乳占比UP" onclick="toggleKw(this)">母乳占比UP</span>
+          </div>
+          <div class="kw-tag-group">
+            <span class="kw-tag-label">🌟 成长进度</span>
+            <span class="kw-tag" data-kw="经验值+100" onclick="toggleKw(this)">经验值+100</span>
+            <span class="kw-tag" data-kw="通关" onclick="toggleKw(this)">通关</span>
+            <span class="kw-tag" data-kw="稳了" onclick="toggleKw(this)">稳了</span>
+            <span class="kw-tag" data-kw="吃睡规律" onclick="toggleKw(this)">吃睡规律</span>
+            <span class="kw-tag" data-kw="不费妈" onclick="toggleKw(this)">不费妈</span>
+          </div>
+          <div class="kw-tag-group">
+            <span class="kw-tag-label">💕 妈妈感受</span>
+            <span class="kw-tag" data-kw="满分妈妈" onclick="toggleKw(this)">满分妈妈</span>
+            <span class="kw-tag" data-kw="母爱觉醒" onclick="toggleKw(this)">母爱觉醒</span>
+            <span class="kw-tag" data-kw="深夜雷达" onclick="toggleKw(this)">深夜雷达</span>
+            <span class="kw-tag" data-kw="指尖的温度" onclick="toggleKw(this)">指尖的温度</span>
+            <span class="kw-tag" data-kw="母乳的味道" onclick="toggleKw(this)">母乳的味道</span>
+            <span class="kw-tag" data-kw="软乎乎" onclick="toggleKw(this)">软乎乎</span>
+          </div>
+          <div class="kw-tag-group" id="msTagGroup">
+            <span class="kw-tag-label">🎉 本周里程碑 <span class="field-source src-manual" style="font-size:9px">手动勾选</span></span>
+            <span class="ms-tag" data-ms="出生体重get√ 🎯" onclick="toggleMs(this)">出生体重get√ 🎯</span>
+            <span class="ms-tag" data-ms="黄气退散！白到发光 ✨" onclick="toggleMs(this)">黄气退散！白到发光 ✨</span>
+            <span class="ms-tag" data-ms="独立信号已连接 📡" onclick="toggleMs(this)">独立信号已连接 📡</span>
+            <span class="ms-tag" data-ms="千g成就解锁 🏆" onclick="toggleMs(this)">千g成就解锁 🏆</span>
+            <span class="ms-tag" data-ms="8斤大佬上线 😎" onclick="toggleMs(this)">8斤大佬上线 😎</span>
+            <span class="ms-tag" data-ms="10斤选手已就位 🫡" onclick="toggleMs(this)">10斤选手已就位 🫡</span>
+          </div>
+          <div class="kw-tag-group">
+            <span class="kw-tag-label">🏥 专业守护</span>
+            <span class="kw-tag" data-kw="24h护士在岗" onclick="toggleKw(this)">24h护士在岗</span>
+            <span class="kw-tag" data-kw="专属护理日记" onclick="toggleKw(this)">专属护理日记</span>
+            <span class="kw-tag" data-kw="黄疸天天测" onclick="toggleKw(this)">黄疸天天测</span>
+          </div>
+        </div>
       </div>
       <div style="font-size:11px;color:#6b4030;margin:10px 0 6px">🌟 本周治愈指数（1-5星）</div>
       <div class="field-row">
@@ -534,6 +824,10 @@
 <div class="right-panel" id="rightPanel">
   <div class="preview-wrap" id="previewContainer">
     <div class="tip-empty">👈 在左侧填入数据，此处实时预览<br><br><span style="font-size:11px">修改任意字段即可看到效果</span></div>
+  </div>
+  <div class="grid-container" id="gridContainer">
+    <div class="tip-empty" id="gridEmpty">👈 填入数据后点击「九宫格」生成朋友圈卡片<br><br><span style="font-size:11px">9张方卡，3×3排列，截图发朋友圈</span></div>
+    <div class="grid-3x3" id="grid3x3" style="display:none"></div>
   </div>
 </div>
 
@@ -588,22 +882,192 @@ function fillKeyword(idx) {
     '满月倒计时 · 变化惊人 · 感恩相遇'
   ];
   const input = document.getElementById('weekKeywords');
-  if (input && LIST[idx] !== undefined) { input.value = LIST[idx]; updatePreview(); }
+  if (input && LIST[idx] !== undefined) { input.value = LIST[idx]; updatePreview(); updateKeywordTags(); }
+}
+
+function fillNurseTemplate(key) {
+  const MAP = {
+    'jaundice': '黄疸这周稳步下降，数值一次比一次好看！宝宝的小脸越来越白了，妈妈坚持多喂多排的策略太赞了。继续保持节奏，胜利在望 💪🌅',
+    'cord': '脐带顺利毕业啦！小肚脐恢复得干干净净，太棒了。接下来可以放心洗澡、做抚触，宝宝解锁了新的成长阶段 🎓✨',
+    'feeding': '喝奶量这周突飞猛进！一顿比一顿喝得多，小肚子圆滚滚的。妈妈的喂养节奏越来越稳，母乳量也在稳步上升，双赢～ 🍼📈',
+    'weight': '体重稳步达标啦！每一克增长都是宝宝和妈妈共同努力的成果。喂养策略完全正确，宝宝吸收特别好，继续冲冲冲 ⚖️🥳',
+    'newbie': '从手忙脚乱到从容不迫，宝宝和妈妈都在飞速成长！喂奶、拍嗝、换尿布一气呵成，新手妈妈进阶速度惊人 🌱🚀',
+    'fullbm': '全母乳喂养坚持下来了！每一滴都是妈妈的爱与耐心。从追奶到奶量自由，这条路不容易，但妈妈做到了，宝宝都感受得到 💧💕',
+    'month': '恭喜即将出所/满月啦！这一个月的变化太惊人了——从皱巴巴的小团子到肉嘟嘟的天使宝宝，妈妈是最大的功臣。我们都会想念你们的 🎉💝',
+    'skills': '这周解锁了新技能！追视、抬头、抓握……每一个小进步都是里程碑。宝宝每天都在给我们惊喜，成长速度开挂 🔓🌟',
+    'general': '这周各方面都在向好发展！黄疸降了、奶量涨了、体重增了，护理记录一片绿灯。妈妈辛苦了，宝宝在爱的包围下快乐长大 💕🌈'
+  };
+  const textarea = document.getElementById('nurseNote');
+  if (textarea && MAP[key]) { textarea.value = MAP[key]; updatePreview(); }
+}
+
+// ===== 关键词自由组合标签 =====
+function toggleKw(el) {
+  const MAX_TAGS = 6;
+  const active = el.classList.contains('active');
+  if (!active) {
+    const currentActive = document.querySelectorAll('#kwTags .kw-tag.active');
+    if (currentActive.length >= MAX_TAGS) return;
+  }
+  el.classList.toggle('active');
+  syncKeywords();
+}
+
+function syncKeywords() {
+  const tags = document.querySelectorAll('#kwTags .kw-tag.active');
+  const words = Array.from(tags).map(t => t.getAttribute('data-kw'));
+  const input = document.getElementById('weekKeywords');
+  if (input) { input.value = words.join(' · '); }
+  updatePreview();
+}
+
+function updateKeywordTags() {
+  const input = document.getElementById('weekKeywords');
+  if (!input) return;
+  const words = input.value.split('·').map(s => s.trim()).filter(Boolean);
+  document.querySelectorAll('#kwTags .kw-tag').forEach(tag => {
+    const kw = tag.getAttribute('data-kw');
+    if (words.includes(kw)) {
+      tag.classList.add('active');
+    } else {
+      tag.classList.remove('active');
+    }
+  });
+}
+
+// ===== 里程碑手动选择 =====
+function toggleMs(el) {
+  el.classList.toggle('active');
+  syncMilestones();
+}
+function syncMilestones() {
+  const tags = document.querySelectorAll('#msTagGroup .ms-tag.active');
+  const words = Array.from(tags).map(t => t.getAttribute('data-ms'));
+  updatePreview();
+  // 同步到隐藏输入
+  const input = document.getElementById('manualMilestones');
+  if (input) input.value = words.join(' · ');
+}
+// 根据 autoMatchMilestones 结果自动预选里程碑标签
+function autoSelectMilestones(data) {
+  // 先清空所有选中
+  document.querySelectorAll('#msTagGroup .ms-tag').forEach(t => t.classList.remove('active'));
+  // 自动匹配
+  const ma = autoMatchMilestones(data);
+  if (ma.rawTags) {
+    ma.rawTags.forEach(raw => {
+      document.querySelectorAll('#msTagGroup .ms-tag').forEach(t => {
+        if (t.getAttribute('data-ms') === raw) t.classList.add('active');
+      });
+    });
+  }
+  // 同步
+  const words = Array.from(document.querySelectorAll('#msTagGroup .ms-tag.active')).map(t => t.getAttribute('data-ms'));
+  const input = document.getElementById('manualMilestones');
+  if (input) input.value = words.join(' · ');
+  return ma;
+}
+
+// ===== 生活化比喻函数 =====
+function getWeightAnalogy(gain) {
+  if (gain <= 0) return '';
+  if (gain <= 40) return '约一颗草莓的重量 🍓';
+  if (gain <= 70) return '约一颗鸡蛋的重量 🥚';
+  if (gain <= 120) return '约一个猕猴桃的重量 🥝';
+  if (gain <= 200) return '约一个苹果的重量 🍎';
+  if (gain <= 350) return '约一听可乐的重量 🥤';
+  return '约一瓶矿泉水的重量 💧';
+}
+function getLengthAnalogy(gain) {
+  if (gain <= 0) return '';
+  if (gain <= 0.3) return '约一粒米的高度';
+  if (gain <= 0.8) return '约一粒红豆的长度';
+  if (gain <= 1.5) return '约一枚硬币的直径';
+  return '约一节小指的长度';
+}
+function getFeedAnalogy(ml) {
+  if (ml <= 0) return '';
+  if (ml <= 150) return '约半杯养乐多';
+  if (ml <= 280) return '约一盒牛奶的量 🥛';
+  if (ml <= 420) return '约一瓶矿泉水的量';
+  if (ml <= 550) return '约一大杯奶茶的量 🧋';
+  return '约两大杯奶茶的量';
+}
+
+// ===== 里程碑自动匹配 =====
+// 根据本周数据自动匹配6大里程碑，返回00后友好的表达
+function autoMatchMilestones(data) {
+  const mList = [];   // 里程碑标签 (00s表达)
+  const aList = [];   // 成就描述 (叙事化)
+
+  // 1. 恢复出生体重 — 本周从低于出生体重恢复到≥出生体重
+  if (data.birthWeight > 0 && data.weightStart < data.birthWeight && data.weightEnd >= data.birthWeight) {
+    mList.push('出生体重get√ 🎯');
+    aList.push('掉的肉肉都补回来啦');
+  }
+
+  // 2. 黄疸开始下降
+  if (data.jaundiceStart > data.jaundiceEnd) {
+    mList.push('黄气退散！白到发光 ✨');
+    aList.push('小黄人变身进行中');
+  }
+
+  // 3. 脐带脱落
+  if (data.cordStatus === 'fell') {
+    mList.push('独立信号已连接 📡');
+    aList.push('正式开启独立成长模式');
+  }
+
+  // 4. 体重增长满1000克 (累计)
+  if (data.birthWeight > 0 && data.weightEnd - data.birthWeight >= 1000) {
+    mList.push('千g成就解锁 🏆');
+    aList.push('长肉KPI超额完成');
+  }
+
+  // 5. 体重超4000克 — 本周突破
+  if (data.weightEnd >= 4000 && data.weightStart < 4000) {
+    mList.push('8斤大佬上线 😎');
+    aList.push('抱起来终于有手感了');
+  }
+
+  // 6. 体重超5000克 — 本周突破
+  if (data.weightEnd >= 5000 && data.weightStart < 5000) {
+    mList.push('10斤选手已就位 🫡');
+    aList.push('论斤卖的可爱已达成');
+  }
+
+  // 成就描述前置本周体重增长
+  const growthText = `体重增长${data.weightGain}g`;
+  const allAchievements = aList.length > 0 ? [growthText, ...aList].join('，') : growthText;
+
+  return {
+    milestoneText: mList.join(' · ') || '本周平稳过渡 ✨',
+    achievementText: allAchievements,
+    rawTags: mList
+  };
 }
 
 // ===== 预览引擎 =====
 function updatePreview() {
   const data = readFormData();
+  // 自动预选里程碑标签 + 合并手动选择
+  autoSelectMilestones(data);
+  const manualMs = ($('#manualMilestones').value || '').split(' · ').filter(s=>s.trim());
+  const ma = autoMatchMilestones(data);
+  data.milestone = [...new Set([...manualMs, ...ma.rawTags])].join(' · ') || '本周平稳过渡 ✨';
+  data.achievement = ma.achievementText;
   renderPreview(data);
 }
 
 function readFormData() {
-  return {
+  const result = {
     babyName:     $('#babyName').value || '宝宝',
     weekNum:      $('#weekNum').value,
     weekLabel:    '第' + $('#weekNum').value + '周',
     postpartum:   $('#postpartumDays').value || '',
+    postpartumLastDay: (() => { const m = ($('#postpartumDays').value||'').match(/\d+/g); return m ? parseInt(m[m.length-1]) : 0; })(),
     dateRange:    $('#dateRange').value || '',
+    birthWeight:  parseFloat($('#birthWeight').value) || 0,
     weightStart:  parseFloat($('#weightStart').value) || 0,
     weightEnd:    parseFloat($('#weightEnd').value) || 0,
     weightGain:   (parseFloat($('#weightEnd').value)||0) - (parseFloat($('#weightStart').value)||0),
@@ -614,16 +1078,19 @@ function readFormData() {
     jaundiceStart: parseFloat($('#jaundiceStart').value) || 0,
     jaundiceMid:   parseFloat($('#jaundiceMid').value) || 0,
     jaundiceEnd:   parseFloat($('#jaundiceEnd').value) || 0,
-    feedDaily:    getDailyValues('feed'),
+    breastDuration: parseInt($('#breastDuration').value) || 0,
+    breastMilk:   parseInt($('#breastMilk').value) || 0,
+    formulaMilk:  parseInt($('#formulaMilk').value) || 0,
+    feedingType:  $('#feedingType').value,
     feedAvg:      0,
-    breastRatio:  parseInt($('#breastRatio').value) || 0,
+    breastRatio:  0,
     dailyBowel:   parseInt($('#dailyBowel').value) || 0,
     bathCount:    parseInt($('#bathCount').value) || 0,
     cordStatus:   $('#cordStatus').value,
     jaundiceChecks: parseInt($('#jaundiceChecks').value) || 0,
     nurseNote:    $('#nurseNote').value || '',
-    milestone:    $('#milestone').value || '',
-    achievement:  $('#achievement').value || '',
+    milestone:    '',
+    achievement:  '',
     nextWeekItems: ($('#nextWeekItems').value || '').split('\n').filter(s=>s.trim()),
     referralText: $('#referralText').value || '推荐闺蜜入住得福利',
     babyPersona: $('#babyPersona').value,
@@ -640,6 +1107,11 @@ function readFormData() {
     healSleep: parseInt($('#healSleep').value) || 4,
     healInteract: parseInt($('#healInteract').value) || 5,
   };
+  // 自动计算喂养衍生值
+  result.feedAvg = result.breastMilk + result.formulaMilk;
+  result.breastRatio = result.feedAvg > 0 ? Math.round(result.breastMilk / result.feedAvg * 100) : 0;
+  return result;
+  return result;
 }
 
 function getDailyValues(prefix) {
@@ -653,10 +1125,29 @@ function getDailyValues(prefix) {
 function $(sel) { return document.querySelector(sel); }
 
 function renderPreview(data) {
-  data.feedAvg = Math.round(data.feedDaily.reduce((a,b)=>a+b,0) / 7);
+  // feedAvg & breastRatio 已由 readFormData 自动计算
   $('#weightGain').textContent = (data.weightGain >= 0 ? '+' : '') + data.weightGain + 'g';
   $('#lengthGain').textContent = (data.lengthGain >= 0 ? '+' : '') + data.lengthGain + 'cm';
-  $('#dailyFeedAvg').textContent = data.feedAvg + 'ml';
+  $('#dailyFeedTotal').textContent = data.feedAvg + 'ml';
+  const ratioRow = $('#breastRatioRow');
+  if (ratioRow) ratioRow.style.display = data.feedingType === 'formula' ? 'none' : '';
+  if (data.feedingType !== 'formula') {
+    $('#autoBreastRatio').textContent = data.breastRatio + '%';
+    const ratioLabel = $('#autoBreastRatioLabel');
+    if (ratioLabel) ratioLabel.textContent = '⚡ 母乳占比';
+  }
+  // 更新表单区里程碑/成就显示
+  const mDisplay = $('#milestoneDisplay');
+  const aDisplay = $('#achievementDisplay');
+  if (mDisplay) {
+    const msList = data.milestone.split(' · ').filter(m=>m.trim());
+    if (msList.length && msList[0] !== '本周平稳过渡 ✨') {
+      mDisplay.innerHTML = msList.map(m => '<span style="background:linear-gradient(135deg,#fff6ed,#ffe8d8);border:1px solid rgba(200,140,70,.3);border-radius:10px;padding:2px 8px;font-size:11px;color:#c87040;font-weight:600;white-space:nowrap;display:inline-block;margin:2px 3px">🎉 '+h(m.trim())+'</span>').join('');
+    } else {
+      mDisplay.innerHTML = '<span style="color:#b8a090;font-size:12px">选择下方里程碑标签…</span>';
+    }
+  }
+  if (aDisplay) aDisplay.innerHTML = data.achievement;
 
   const jaundiceNormal = data.jaundiceEnd <= 12.9;
   const cordFell = data.cordStatus === 'fell';
@@ -666,16 +1157,11 @@ function renderPreview(data) {
   const weightMax = Math.max.apply(null, data.weightDaily);
   const weightRange = weightMax - weightMin || 1;
 
-  const feedMin = Math.min.apply(null, data.feedDaily);
-  const feedMax = Math.max.apply(null, data.feedDaily);
-  const feedRange = feedMax - feedMin || 1;
-
   const jS = data.jaundiceStart, jM = data.jaundiceMid, jE = data.jaundiceEnd;
   const jMax = Math.max(jS, jM, jE, 13);
   const jMin = Math.min(jS, jM, jE);
 
   let weightBars = '', weightPts = '', weightPoly = '';
-  let feedBars = '';
   let nextItems = data.nextWeekItems.map(s =>
     '<div class="next-item"><span class="next-item-icon">●</span>' + h(s) + '</div>'
   ).join('');
@@ -686,9 +1172,6 @@ function renderPreview(data) {
     weightBars += '<rect x="' + (x-4) + '" y="' + (60-hPct) + '" width="8" height="' + hPct + '" rx="3" fill="url(#wBarGrad)" opacity="0.7"/>';
     weightPts += (i>0?' ':'') + x.toFixed(1) + ',' + (60-hPct).toFixed(1);
     weightPoly += ' ' + x.toFixed(1) + ',' + (60-hPct).toFixed(1);
-
-    const fPct = (data.feedDaily[i] - feedMin) / feedRange * 42 + 6;
-    feedBars += '<rect x="' + (x-6) + '" y="' + (48-fPct) + '" width="12" height="' + fPct + '" rx="3" fill="url(#fBarGrad)"/>';
   }
 
   const jChartPoints = [
@@ -704,9 +1187,10 @@ function renderPreview(data) {
   ).join('');
 
   const html = `
-<div style="background:#f2ede8">
-<div class="cover" style="background:linear-gradient(160deg,#fff8f0,#fde8d0,#f8d0b0);border-radius:24px 24px 0 0;padding:32px 24px 24px;text-align:center;overflow:hidden;position:relative">
-  <div style="width:100px;height:100px;margin:0 auto 12px;background:linear-gradient(135deg,#faf5f0,#f5ece0);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 8px 32px rgba(180,160,140,.2)">
+<div style="background:#fff;border-radius:24px;overflow:hidden">
+<div class="cover" style="background:linear-gradient(160deg,#fff8f0,#fde8d0,#f8d0b0);padding:18px 24px 16px;text-align:center;overflow:hidden;position:relative">
+  <div style="font-size:13px;font-weight:600;color:#b89870;letter-spacing:3px;margin-bottom:6px;opacity:0.8">成都橘米母婴中心</div>
+  <div style="width:80px;height:80px;margin:0 auto 8px;background:linear-gradient(135deg,#faf5f0,#f5ece0);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 6px 24px rgba(180,160,140,.15)">
     <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
       <!-- 月亮背景 -->
       <path d="M48 12 C38 12 30 20 30 32 C30 44 38 52 48 52 C44 48 42 42 42 36 C42 28 44 22 48 18 Z" fill="#E8D5C0" opacity="0.3"/>
@@ -745,25 +1229,44 @@ function renderPreview(data) {
       <path d="M54 30 L54.5 31.2 L55.8 31.5 L54.5 31.8 L54 33 L53.5 31.8 L52.2 31.5 L53.5 31.2 Z" fill="#E8D8C0" opacity="0.3"/>
     </svg>
   </div>
-  <div style="font-size:11px;color:#c08060;letter-spacing:3px;margin-bottom:8px">🍊 橘米月子中心</div>
-  <div style="font-size:25px;font-weight:700;color:#3d2010;line-height:1.2;margin-bottom:6px">${h(data.babyName)}宝贝<span style="color:#e06030">${data.weekLabel}</span>成长报告</div>
-  <div style="font-size:14px;color:#a07050;margin-bottom:12px">专属护理周报 · ${h(data.dateRange)}</div>
+  <div style="font-size:14px;color:#a07050;margin-bottom:2px;letter-spacing:1px;font-weight:500">亲爱的 ${h(data.babyName)} 妈妈</div>
+  <div style="font-size:28px;font-weight:800;color:#3d2010;line-height:1.15;margin-bottom:4px">${h(data.babyName)}在橘米 · <span style="color:#e06030">${data.weekLabel}</span>成长</div>
+  <div style="font-size:13px;color:#a07050;margin-bottom:8px">专属护理周报 · ${h(data.dateRange)}</div>
   <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
     <span style="background:rgba(255,255,255,.7);border:1px solid rgba(200,120,60,.2);border-radius:20px;font-size:11px;color:#c07040;padding:4px 12px">产后 ${h(data.postpartum)}</span>
     <span style="background:rgba(255,255,255,.7);border:1px solid rgba(200,120,60,.2);border-radius:20px;font-size:11px;color:#c07040;padding:4px 12px">护理满 ${data.bathCount} 天</span>
   </div>
-  <div style="margin-top:8px;font-size:10px;color:#ff4444;background:#fff0f0;border-radius:20px;padding:3px 10px;display:inline-block">📷 长按截图 · 分享给家人</div>
+  <div style="margin-top:6px;font-size:10px;color:#b09070;background:#faf7f2;border-radius:20px;padding:3px 10px;display:inline-block">📷 长按保存 · 分享宝宝成长</div>
+  <div style="display:flex;align-items:center;gap:6px;margin-top:10px;justify-content:center">
+    <span style="font-size:11px;color:#b09070">🕊️</span>
+    <span style="font-size:12px;color:#8b6040;letter-spacing:0.5px">和 ${h(data.babyName)} 在一起的第 <b style="color:#e06030;font-size:15px">${data.postpartumLastDay}</b> 天</span>
+    <span style="font-size:11px;color:#b09070">🕊️</span>
+  </div>
 </div>
 
-<div style="background:#fff;padding:16px 18px">
+<div style="background:#fff;padding:16px 18px 8px">
+  <div style="display:flex;align-items:center;gap:9px;margin-bottom:10px">
+    <span style="width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,#fdf8f2,#fef0e0);display:flex;align-items:center;justify-content:center;font-size:17px">💌</span>
+    <span style="font-size:14px;font-weight:700;color:#2d1808;flex:1">橘米护理师对你说</span>
+    <span style="font-size:10px;color:#e09030;background:#fff8ed;border-radius:10px;padding:2px 8px">悄悄话</span>
+  </div>
+  <div style="background:linear-gradient(135deg,#fdf8f2,#fef0e0);border:1.5px solid #f0d8b8;border-radius:14px;padding:14px 16px 12px">
+    <div style="font-size:30px;color:#f0c890;line-height:1;margin-bottom:4px">&ldquo;</div>
+    <div style="font-size:13px;color:#6b4030;line-height:1.85">${h(data.nurseNote)}</div>
+    <div style="font-size:11px;color:#b8a090;margin-top:8px;text-align:right">— 专属护理团队</div>
+  </div>
+</div>
+
+<div style="background:#fff;padding:8px 18px 16px">
   <div style="display:flex;gap:10px;align-items:center;background:linear-gradient(135deg,#fffbf0,#fff0d0);border:1.5px solid #f8dca0;border-radius:12px;padding:10px 12px;margin-bottom:8px">
     <span style="font-size:24px">🌟</span>
     <span style="font-size:12px;color:#7b4010;line-height:1.5"><b style="color:#c04020;font-size:13px">宝宝本周最棒！</b><br>${h(data.achievement)}</span>
   </div>
-  ${cordFell ? `
-  <div style="display:flex;gap:10px;align-items:center;background:linear-gradient(135deg,#f8fff0,#eaffd8);border:1.5px solid #d8f0c0;border-radius:12px;padding:10px 12px;margin-bottom:8px">
-    <span style="font-size:24px">🎉</span>
-    <span style="font-size:12px;color:#2a6010;line-height:1.5"><b style="color:#30a060;font-size:13px">里程碑：${h(data.milestone)}</b><br>宝宝的护理做得非常细致👍</span>
+  ${data.milestone !== '本周平稳过渡 ✨' ? `
+  <div style="background:linear-gradient(135deg,#f8fff0,#eaffd8);border:1.5px solid #d8f0c0;border-radius:12px;padding:10px 12px;margin-bottom:8px;text-align:center">
+    <span style="font-size:20px">🎉</span>
+    <span style="font-size:12px;color:#2a6010;line-height:1.8"><b style="color:#30a060;font-size:13px">里程碑达成</b><br>
+    <span style="display:flex;gap:5px;flex-wrap:wrap;justify-content:center;margin-top:3px">${data.milestone.split(' · ').map(m=>'<span style="background:#e0f5d0;border-radius:10px;padding:2px 9px;font-size:11px;color:#3a8020;font-weight:600;white-space:nowrap">'+h(m.trim())+'</span>').join('')}</span></span>
   </div>` : ''}
 </div>
 
@@ -777,12 +1280,15 @@ function renderPreview(data) {
     <div style="background:linear-gradient(135deg,#fff4e8,#fde0c0);border-radius:12px;padding:11px 12px 10px;text-align:center">
       <div style="font-size:10px;color:#b8a090;margin-bottom:3px">体重（周末）</div>
       <div style="font-size:24px;font-weight:700;color:#c04020;line-height:1.1">${data.weightEnd}<span style="font-size:12px;font-weight:400;color:#a08070">g</span></div>
-      <div style="font-size:10px;color:#40a870;margin-top:3px">▲ ${data.weightGain >= 0 ? '+' : ''}${data.weightGain}g</div>
+      <div style="font-size:11px;color:#c08850;margin-top:5px;font-weight:500">▲ ${data.weightGain >= 0 ? '+' : ''}${data.weightGain}g${data.weightGain > 0 ? ' · '+getWeightAnalogy(data.weightGain) : ''}</div>
     </div>
     <div style="background:linear-gradient(135deg,#fff4e8,#fde0c0);border-radius:12px;padding:11px 12px 10px;text-align:center">
       <div style="font-size:10px;color:#b8a090;margin-bottom:3px">身长</div>
-      <div style="font-size:24px;font-weight:700;color:#c04020;line-height:1.1">${data.lengthEnd}<span style="font-size:12px;font-weight:400;color:#a08070">cm</span></div>
-      <div style="font-size:10px;color:#40a870;margin-top:3px">▲ ${parseFloat(data.lengthGain) >= 0 ? '+' : ''}${data.lengthGain}cm</div>
+      ${parseFloat(data.lengthEnd) > 0
+        ? `<div style="font-size:24px;font-weight:700;color:#c04020;line-height:1.1">${data.lengthEnd}<span style="font-size:12px;font-weight:400;color:#a08070">cm</span></div>
+           <div style="font-size:11px;color:#c08850;margin-top:5px;font-weight:500">${parseFloat(data.lengthGain) > 0 ? `▲ +${data.lengthGain}cm · ${getLengthAnalogy(parseFloat(data.lengthGain))}` : '静静长大 · 每厘米都值得等待 🌱'}</div>`
+        : `<div style="font-size:15px;font-weight:700;color:#c08060;line-height:1.6;margin-top:6px">静静长大</div><div style="font-size:11px;color:#c89870;margin-top:2px">每厘米都值得等待 🌱</div><div style="font-size:9px;color:#c8a080;margin-top:4px">✨ 宝贝有自己的生长节奏</div>`
+      }
     </div>
   </div>
   <div style="background:#faf7f4;border-radius:12px;padding:12px 14px 10px">
@@ -863,40 +1369,39 @@ function renderPreview(data) {
   <div style="display:flex;align-items:center;gap:9px;margin-bottom:14px">
     <span style="width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,#fff0f5,#ffd0e0);display:flex;align-items:center;justify-content:center;font-size:17px">🍼</span>
     <span style="font-size:15px;font-weight:700;color:#2d1808;flex:1">喂养记录</span>
-    <span style="font-size:11px;color:#e05080;background:#fff0f5;border-radius:10px;padding:2px 8px">母乳优先</span>
+    <span style="font-size:11px;color:${data.feedingType==='formula'?'#c07040':'#e05080'};background:${data.feedingType==='formula'?'#fff8f0':'#fff0f5'};border-radius:10px;padding:2px 8px">${data.feedingType==='breast'?'纯母乳':data.feedingType==='mixed'?'混合喂养':'配方奶喂养'}</span>
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
     <div style="background:linear-gradient(135deg,#fff4e8,#fde0c0);border-radius:12px;padding:11px 12px;text-align:center">
-      <div style="font-size:10px;color:#b8a090">日均总哺乳量</div>
+      <div style="font-size:10px;color:#b8a090">日均总奶量</div>
       <div style="font-size:24px;font-weight:700;color:#c04020;line-height:1.1">${data.feedAvg}<span style="font-size:12px;font-weight:400;color:#a08070">ml</span></div>
-      <div style="font-size:10px;color:#40a870">▲ 本周稳步提升</div>
+      <div style="font-size:11px;color:#c08850;margin-top:5px;font-weight:500">${data.feedAvg > 0 ? getFeedAnalogy(data.feedAvg) : '稳定喂养中'}</div>
     </div>
     <div style="background:#faf7f4;border-radius:12px;padding:11px 12px;text-align:center">
-      <div style="font-size:10px;color:#b8a090">母乳占比</div>
-      <div style="font-size:24px;font-weight:700;color:#2d1808;line-height:1.1">${data.breastRatio}<span style="font-size:12px;font-weight:400;color:#a08070">%</span></div>
-      <div style="font-size:10px;color:#40a870">${data.breastRatio>=70?'纯母乳目标达标':'混合喂养中'}</div>
+      <div style="font-size:10px;color:#b8a090">${data.feedingType==='formula'?'日均配方乳量':'母乳占比'}</div>
+      <div style="font-size:24px;font-weight:700;color:#2d1808;line-height:1.1">${data.feedingType==='formula'?data.formulaMilk:data.breastRatio}<span style="font-size:12px;font-weight:400;color:#a08070">${data.feedingType==='formula'?'ml':'%'}</span></div>
+      <div style="font-size:10px;color:${data.feedingType==='formula'?'#c07040':'#40a870'}">${data.feedingType==='formula'?'科学配比 · 营养均衡':(data.breastRatio>=70?'纯母乳目标达标':'混合喂养中')}</div>
     </div>
   </div>
-  <div style="background:#faf7f4;border-radius:12px;padding:12px 14px 10px">
-    <div style="display:flex;justify-content:space-between;font-size:11px;color:#a08070;margin-bottom:8px"><b style="color:#6b4030">每日哺乳量</b><span>ml</span></div>
-    <svg width="100%" height="52" viewBox="0 0 320 52" style="display:block">
-      <defs><linearGradient id="fBarGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e07030" stop-opacity="0.8"/><stop offset="100%" stop-color="#e07030" stop-opacity="0.2"/></linearGradient></defs>
-      ${feedBars}
-      ${data.feedDaily.map((v,i) => {
-        const x = i/6*296+12;
-        const fPct = (v-feedMin)/feedRange*42+6;
-        return '<text x="'+(x).toFixed(0)+'" y="'+(46-fPct-3)+'" fill="#c04020" font-size="8" font-weight="600" text-anchor="middle">'+v+'</text>';
-      }).join('')}
-    </svg>
-    <div style="display:flex;gap:4px;margin-top:4px">${days.map(d=>'<span style="flex:1;font-size:10px;color:#b8a090;text-align:center">'+d+'</span>').join('')}</div>
+  <div style="background:#faf7f4;border-radius:12px;padding:12px 14px 10px;margin-bottom:10px">
+    <div style="font-size:11px;color:#a08070;margin-bottom:8px"><b style="color:#6b4030">本周喂养构成</b></div>
+    <div style="display:grid;grid-template-columns:${data.feedingType==='formula'?'repeat(2,1fr)':'repeat(3,1fr)'};gap:8px">
+      ${data.feedingType!=='formula'?`<div style="text-align:center"><div style="font-size:9px;color:#b8a090;margin-bottom:2px">母乳时长</div><div style="font-size:16px;font-weight:700;color:#6b4030">${data.breastDuration}<span style="font-size:10px;font-weight:400;color:#a08070">min</span></div></div>`:''}
+      ${data.feedingType!=='formula'?`<div style="text-align:center;border-left:1px solid #f0ece8;border-right:1px solid #f0ece8"><div style="font-size:9px;color:#b8a090;margin-bottom:2px">母乳量</div><div style="font-size:16px;font-weight:700;color:#e05080">${data.breastMilk}<span style="font-size:10px;font-weight:400;color:#a08070">ml</span></div></div>`:`<div style="text-align:center;border-right:1px solid #f0ece8"><div style="font-size:9px;color:#b8a090;margin-bottom:2px">日均总奶量</div><div style="font-size:16px;font-weight:700;color:#6b4030">${data.feedAvg}<span style="font-size:10px;font-weight:400;color:#a08070">ml</span></div></div>`}
+      <div style="text-align:center">
+        <div style="font-size:9px;color:#b8a090;margin-bottom:2px">配方乳</div>
+        <div style="font-size:16px;font-weight:700;color:#c07040">${data.formulaMilk}<span style="font-size:10px;font-weight:400;color:#a08070">ml</span></div>
+      </div>
+    </div>
   </div>
-  <div style="margin-top:10px">
+  ${data.feedingType!=='formula'?`
+  <div style="margin-bottom:10px">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
       <span style="font-size:12px;color:#6b4030">母乳喂养</span>
       <span style="font-size:12px;color:#a08070">${data.breastRatio}%</span>
     </div>
     <div style="height:7px;background:#f0ece8;border-radius:4px;overflow:hidden"><div style="height:100%;width:${data.breastRatio}%;background:linear-gradient(90deg,#f090a0,#e05080);border-radius:4px"></div></div>
-  </div>
+  </div>`:''}
   <div style="margin-top:8px">
     <div style="font-size:11px;color:#a08070;margin-bottom:4px">日均排便：<b style="color:#6b4030;font-size:13px">${data.dailyBowel} 次</b> · 消化吸收良好</div>
   </div>
@@ -905,7 +1410,8 @@ function renderPreview(data) {
 <div style="background:#fff;padding:2px 18px 16px">
   <div style="display:flex;align-items:center;gap:9px;margin-bottom:14px">
     <span style="width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,#f0fff5,#c8f0d8);display:flex;align-items:center;justify-content:center;font-size:17px">📋</span>
-    <span style="font-size:15px;font-weight:700;color:#2d1808;flex:1">护理执行 &amp; 寄语</span>
+    <span style="font-size:15px;font-weight:700;color:#2d1808;flex:1">护理执行记录</span>
+    <span style="font-size:10px;color:#30a060;background:#edfff5;border-radius:10px;padding:2px 8px">全部完成 ✓</span>
   </div>
   <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">
     <span style="background:#edfff5;border:1px solid #b8f0d0;border-radius:20px;font-size:12px;color:#30a060;padding:4px 11px">🛁 洗澡 ${data.bathCount}次 ✓</span>
@@ -913,16 +1419,11 @@ function renderPreview(data) {
     <span style="background:#edfff5;border:1px solid #b8f0d0;border-radius:20px;font-size:12px;color:#30a060;padding:4px 11px">💊 维生素AD ✓</span>
     <span style="background:#eef5ff;border:1px solid #c8dcf8;border-radius:20px;font-size:12px;color:#4080c8;padding:4px 11px">📏 黄疸监测 ${data.jaundiceChecks}次</span>
   </div>
-  <div style="background:linear-gradient(135deg,#fdf8f2,#fef0e0);border:1.5px solid #f0d8b8;border-radius:14px;padding:14px 16px 12px">
-    <div style="font-size:30px;color:#f0c890;line-height:1;margin-bottom:4px">"</div>
-    <div style="font-size:13px;color:#6b4030;line-height:1.75">${h(data.nurseNote)}</div>
-    <div style="font-size:11px;color:#b8a090;margin-top:8px;text-align:right">— 护理团队寄语</div>
-  </div>
 </div>
 
 <div style="background:#fff;padding:2px 18px 16px">
   <div style="display:flex;align-items:center;gap:9px;margin-bottom:14px">
-    <span style="width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,#fff5f0,#ffd8c8);display:flex;align-items:center;justify-content:center;font-size:17px">🦊</span>
+    <span style="width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,#fff5f0,#ffd8c8);display:flex;align-items:center;justify-content:center;font-size:17px">🐣</span>
     <span style="font-size:15px;font-weight:700;color:#2d1808;flex:1">宝宝本周人设</span>
     <span style="font-size:10px;color:#ff6699;background:#fff0f5;border-radius:10px;padding:2px 8px">NEW</span>
   </div>
@@ -937,7 +1438,7 @@ function renderPreview(data) {
       data.babyPersona==='成长小马达' ? '体重身长齐头并进，发育速度惊人！' :
       '每天都有新表情，逗得护士姐姐哈哈大笑～'
     }</div>
-    <div style="margin-top:10px;font-size:10px;color:#ff88aa;background:#fff;border-radius:12px;padding:3px 10px;display:inline-block">📸 截图发给家人 · 一起夸夸宝宝</div>
+    <div style="margin-top:10px;font-size:10px;color:#ff88aa;background:#fff;border-radius:12px;padding:3px 10px;display:inline-block">📸 和最爱的人 · 一起见证宝宝成长</div>
   </div>
 </div>
 
@@ -985,7 +1486,7 @@ function renderPreview(data) {
       <span style="font-size:11px;color:#a08050;line-height:1.5">你不是一个人在战斗<br>橘米全体护理团队一直在你身边</span>
     </div>
   </div>
-  <div style="margin-top:6px;font-size:10px;color:#ff8888;text-align:center;background:#fff5f5;border-radius:12px;padding:3px 10px;display:inline-block;width:100%;box-sizing:border-box">💕 看到这里眼眶热了？截图发给妈妈吧</div>
+  <div style="margin-top:6px;font-size:10px;color:#ff8888;text-align:center;background:#fff5f5;border-radius:12px;padding:3px 10px;display:inline-block;width:100%;box-sizing:border-box">💕 每个用心守护的瞬间，都值得被记录</div>
 </div>
 
 <div style="background:#fff;padding:2px 18px 16px">
@@ -1036,14 +1537,15 @@ function renderPreview(data) {
   </div>
 </div>
 
-<div style="background:#fff;border-radius:0 0 24px 24px;padding:16px 20px 20px;text-align:center;border-top:1px solid #f0ece8">
+<div style="background:#fff;padding:16px 20px 20px;text-align:center;border-top:1px solid #f0ece8">
   <div style="font-size:11px;color:#c0b0a0;line-height:1.8">本报告数据来源：护理日志 · 服务记录<br>如有疑问请联系您的专属客服</div>
-  <div style="font-size:13px;font-weight:700;color:#c06030;margin-top:6px">🍊 橘米月子中心</div>
+  <div style="font-size:13px;font-weight:700;color:#c06030;margin-top:6px">🍊 成都橘米母婴中心</div>
   <div style="font-size:10px;color:#c0b0a0;margin-top:4px">专业月子护理服务</div>
-  <div style="margin-top:8px;padding:6px 12px;background:#fff8ed;border:1px solid #f0d8b0;border-radius:20px;display:inline-block">
-    <div style="font-size:12px;color:#c06030;font-weight:600">💰 ${h(data.referralText)}</div>
+  <div style="font-size:11px;color:#c08050;letter-spacing:1px;margin-bottom:8px">科学坐月子 · 从专业护理开始</div>
+  <div style="margin-top:8px;padding:10px 16px;background:linear-gradient(135deg,#fffbf5,#fff5e8);border:1px solid #f0d8b8;border-radius:20px;display:inline-block">
+    <div style="font-size:12px;color:#a07050;line-height:1.7">在橘米的每一天都值得记录 🌱<br><span style="font-weight:600;color:#b08050">和 ${h(data.babyName)} 一起慢慢长大 ✨</span></div>
   </div>
-  <div style="margin-top:6px;font-size:10px;color:#ff6666;background:#fff5f5;border-radius:20px;padding:3px 10px;display:inline-block">💕 晒出宝宝成长 · 让更多妈妈看见</div>
+  <div style="margin-top:6px;font-size:12px;font-weight:600;color:#b89870;border-radius:20px;padding:3px 10px;display:inline-block;letter-spacing:2px">成都橘米母婴中心 · 记录每一份成长</div>
 </div>
 </div>`;
 
@@ -1057,23 +1559,24 @@ function resetForm() {
   $('#weekNum').value = '3';
   $('#postpartumDays').value = '15-21天';
   $('#dateRange').value = '5月26日 — 6月1日';
-  $('#weightStart').value = '3300';
-  $('#weightEnd').value = '3480';
-  $('#wgtD1').value=3300;$('#wgtD2').value=3320;$('#wgtD3').value=3350;$('#wgtD4').value=3380;$('#wgtD5').value=3400;$('#wgtD6').value=3440;$('#wgtD7').value=3480;
+  $('#weightStart').value = '3100';
+  $('#weightEnd').value = '5200';
+  $('#wgtD1').value=3300;$('#wgtD2').value=3450;$('#wgtD3').value=3680;$('#wgtD4').value=3950;$('#wgtD5').value=4200;$('#wgtD6').value=4650;$('#wgtD7').value=5200;
+  $('#birthWeight').value = '3200';
   $('#lengthStart').value = '50.4';
   $('#lengthEnd').value = '51.2';
   $('#jaundiceStart').value = '12.6';
   $('#jaundiceMid').value = '9.8';
   $('#jaundiceEnd').value = '7.2';
-  $('#feedD1').value=390;$('#feedD2').value=400;$('#feedD3').value=410;$('#feedD4').value=415;$('#feedD5').value=425;$('#feedD6').value=440;$('#feedD7').value=450;
-  $('#breastRatio').value = '72';
+  $('#feedingType').value = 'mixed';
+  $('#breastDuration').value = '240';
+  $('#breastMilk').value = '300';
+  $('#formulaMilk').value = '119';
   $('#dailyBowel').value = '4';
   $('#bathCount').value = '7';
   $('#cordStatus').value = 'fell';
   $('#jaundiceChecks').value = '3';
   $('#nurseNote').value = '小宝贝这周进步太明显了！黄疸降得很顺利，脐带也脱落了，喝奶量一天比一天多。妈妈坚持亲喂的决心超棒，宝宝都感受得到的💕';
-  $('#milestone').value = '脐带今日脱落！';
-  $('#achievement').value = '体重增长180g，黄疸值恢复正常';
   $('#nextWeekItems').value = '宝宝游泳训练正式开始（周三首次）\n专业抚触课程，帮助神经发育\n第四周生长评估，全身体检\n家人会面日：周六14:00-16:00';
   $('#referralText').value = '推荐闺蜜入住，双方各送1天续住';
   $('#babyPersona').value = '干饭王者';
@@ -1084,6 +1587,7 @@ function resetForm() {
   $('#skill5').checked = true;
   $('#momHighlight').value = '纯母乳坚持7天！每天按时亲喂，深夜也从不落下。宝宝的黄疸能这么快降下来，都是妈妈的功劳！';
   $('#weekKeywords').value = '黄疸退散 · 干饭达人 · 脐带毕业';
+  updateKeywordTags();
   $('#healFeed').value = '5';
   $('#healSleep').value = '4';
   $('#healInteract').value = '5';
@@ -1094,7 +1598,384 @@ function scrollToPreview() {
   document.getElementById('rightPanel').scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+updateKeywordTags();
 updatePreview();
+
+// ===== 九宫格模式 =====
+function toggleGridMode() {
+  const isGrid = document.body.classList.toggle('grid-mode');
+  const btn = document.getElementById('btnGrid');
+  if (btn) { btn.textContent = isGrid ? '⬜ 长图' : '⬜ 九宫格'; btn.title = isGrid ? '切换回长图预览' : '切换九宫格朋友圈排版'; }
+  if (isGrid) {
+    generate9Grid();
+    document.getElementById('gridEmpty').style.display = 'none';
+    document.getElementById('grid3x3').style.display = 'grid';
+  }
+}
+
+// ===== 拟人化 + 场景化 SVG 图标 =====
+// 设计理念：每个图标都是一个迷你故事场景，融入宝宝/母婴元素，有表情、有互动、有温度
+const icons = {
+  // 🐾 体重 — 胖宝宝坐在体重秤上，秤盘指针欢快地指向右边
+  scale:  `<svg viewBox="0 0 24 24" fill="none">
+    <!-- 底座 -->
+    <rect x="6" y="19" width="12" height="3" rx="1.5" fill="currentColor" opacity="0.35"/>
+    <!-- 秤盘 -->
+    <ellipse cx="12" cy="18" rx="7" ry="2.5" fill="currentColor" opacity="0.22"/>
+    <ellipse cx="12" cy="17.5" rx="6.5" ry="2" fill="currentColor" opacity="0.14"/>
+    <!-- 指针 -->
+    <line x1="12" y1="16" x2="16.5" y2="12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
+    <!-- 胖宝宝身体 -->
+    <ellipse cx="12" cy="14" rx="4" ry="4.5" fill="currentColor" opacity="0.28"/>
+    <!-- 宝宝头 -->
+    <circle cx="12" cy="8" r="4" fill="currentColor" opacity="0.36"/>
+    <!-- 头发 -->
+    <path d="M9 5.5C10 4 14 4 15 5.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+    <!-- 萌萌眼 -->
+    <circle cx="10.5" cy="8" r="1" fill="currentColor" opacity="0.8"/>
+    <circle cx="13.5" cy="8" r="1" fill="currentColor" opacity="0.8"/>
+    <!-- 腮红 -->
+    <circle cx="9" cy="9.5" r="1.2" fill="currentColor" opacity="0.25"/>
+    <circle cx="15" cy="9.5" r="1.2" fill="currentColor" opacity="0.25"/>
+    <!-- 微笑 -->
+    <path d="M10.5 10.5C11.2 11.3 12.8 11.3 13.5 10.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.65"/>
+    <!-- 小手 -->
+    <circle cx="8" cy="13" r="2" fill="currentColor" opacity="0.32"/>
+    <circle cx="16" cy="13" r="2" fill="currentColor" opacity="0.32"/>
+  </svg>`,
+  // 🍼 喂养 — 胖宝宝双手抱着圆奶瓶，奶瓶有爱心刻度线
+  milk:   `<svg viewBox="0 0 24 24" fill="none">
+    <!-- 宝宝圆脸（背后探出来） -->
+    <circle cx="17" cy="7" r="4.5" fill="currentColor" opacity="0.28"/>
+    <circle cx="15.5" cy="6.5" r="1" fill="currentColor" opacity="0.7"/>
+    <circle cx="18.5" cy="6.5" r="1" fill="currentColor" opacity="0.7"/>
+    <circle cx="15" cy="8" r="1" fill="currentColor" opacity="0.22"/>
+    <circle cx="19" cy="8" r="1" fill="currentColor" opacity="0.22"/>
+    <path d="M16 9C16.5 9.5 17.5 9.5 18 9" stroke="currentColor" stroke-width="0.9" stroke-linecap="round" opacity="0.55"/>
+    <!-- 奶瓶身 -->
+    <rect x="7" y="8" width="9" height="12" rx="4" fill="currentColor" opacity="0.2"/>
+    <rect x="7.5" y="8.5" width="8" height="11" rx="3.5" stroke="currentColor" stroke-width="1.6"/>
+    <!-- 奶嘴 -->
+    <rect x="10" y="5.5" width="3" height="4" rx="1.5" fill="currentColor" opacity="0.32"/>
+    <rect x="9.5" y="3.5" width="4" height="3" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
+    <!-- 奶液 -->
+    <rect x="9" y="13" width="5" height="5" rx="2" fill="currentColor" opacity="0.38"/>
+    <!-- 爱心刻度 -->
+    <path d="M10.5 12.5C10 12 9.5 11.5 10 11C10.5 10.5 11 11 11.3 11.5C11.6 12 11.3 12.5 10.5 12.5Z" fill="currentColor" opacity="0.55"/>
+    <!-- 小手抱瓶 -->
+    <circle cx="7.5" cy="14" r="3" fill="currentColor" opacity="0.22"/>
+    <circle cx="15.5" cy="14" r="3" fill="currentColor" opacity="0.22"/>
+  </svg>`,
+  // ☀️ 黄疸 — 拟人化太阳公公加油退黄疸，额头冒汗但坚持笑眯眯
+  sun:    `<svg viewBox="0 0 24 24" fill="none">
+    <!-- 太阳脸 -->
+    <circle cx="12" cy="12.5" r="5.5" fill="currentColor" opacity="0.32"/>
+    <circle cx="12" cy="12.5" r="5" stroke="currentColor" stroke-width="1.6"/>
+    <!-- 眯眯笑眼（用力中） -->
+    <path d="M9 11.5C9.5 10.5 10.5 10 11 10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.75"/>
+    <path d="M15 11.5C14.5 10.5 13.5 10 13 10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.75"/>
+    <!-- 腮红 -->
+    <circle cx="8.5" cy="13" r="1.5" fill="currentColor" opacity="0.28"/>
+    <circle cx="15.5" cy="13" r="1.5" fill="currentColor" opacity="0.28"/>
+    <!-- 微笑 -->
+    <path d="M9.5 14C10.3 15 11.5 15.5 12 15.5C12.5 15.5 13.7 15 14.5 14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
+    <!-- 汗滴（加油中） -->
+    <path d="M15 8.5C15 7.5 14 6.5 13 6.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" opacity="0.6"/>
+    <circle cx="13" cy="6" r="0.6" fill="currentColor" opacity="0.5"/>
+    <!-- 活泼光芒 -->
+    <line x1="12" y1="2.5" x2="12" y2="4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity="0.55"/>
+    <line x1="12" y1="20" x2="12" y2="22" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity="0.55"/>
+    <line x1="3" y1="12.5" x2="5" y2="12.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity="0.55"/>
+    <line x1="19" y1="12.5" x2="21" y2="12.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity="0.55"/>
+    <line x1="5.5" y1="5.5" x2="7" y2="7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.45"/>
+    <line x1="17" y1="7" x2="18.5" y2="5.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.45"/>
+    <line x1="5.5" y1="19.5" x2="7" y2="18" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.45"/>
+    <line x1="17" y1="18" x2="18.5" y2="19.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.45"/>
+  </svg>`,
+  // 📏 身长 — 胖宝宝乖乖躺在软尺上量身高，头顶冒出小星星"又长高了"
+  ruler:  `<svg viewBox="0 0 24 24" fill="none">
+    <!-- 软尺/垫子 -->
+    <rect x="2" y="16" width="20" height="5" rx="2.5" fill="currentColor" opacity="0.18"/>
+    <rect x="2.5" y="16.5" width="19" height="4" rx="2" stroke="currentColor" stroke-width="1.4"/>
+    <!-- 尺子刻度 -->
+    <line x1="5" y1="18" x2="5" y2="20.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+    <line x1="9" y1="18" x2="9" y2="20.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+    <line x1="13" y1="18" x2="13" y2="20.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+    <line x1="17" y1="18" x2="17" y2="20" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" opacity="0.45"/>
+    <!-- 宝宝身体（躺着） -->
+    <ellipse cx="12" cy="13" rx="5.5" ry="4" fill="currentColor" opacity="0.26"/>
+    <!-- 宝宝头（躺着） -->
+    <circle cx="18.5" cy="10" r="3.5" fill="currentColor" opacity="0.36"/>
+    <!-- 头发 -->
+    <path d="M16 7.5C17 6.5 19 6.5 20 7.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity="0.55"/>
+    <path d="M16.5 7C17.5 6 19 6 19.7 7" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" opacity="0.4"/>
+    <!-- 眼睛（躺着朝上看） -->
+    <circle cx="17.5" cy="9.5" r="0.9" fill="currentColor" opacity="0.75"/>
+    <circle cx="20" cy="9.5" r="0.9" fill="currentColor" opacity="0.75"/>
+    <circle cx="17" cy="11" r="1" fill="currentColor" opacity="0.22"/>
+    <circle cx="20.5" cy="11" r="1" fill="currentColor" opacity="0.22"/>
+    <!-- 微笑 -->
+    <path d="M18 10.8C18.3 11.2 19.2 11.2 19.5 10.8" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" opacity="0.6"/>
+    <!-- 小脚丫（宝宝底部） -->
+    <ellipse cx="7" cy="15" rx="2.5" ry="1.5" fill="currentColor" opacity="0.35"/>
+    <circle cx="5.5" cy="14.5" r="0.7" fill="currentColor" opacity="0.45"/>
+    <circle cx="6.5" cy="13.5" r="0.6" fill="currentColor" opacity="0.4"/>
+    <!-- 头顶小星星：长高了！ -->
+    <path d="M21 5L21.5 6.5L23 6.8L21.5 7.2L21 8.5L20.5 7.2L19 6.8L20.5 6.5Z" fill="currentColor" opacity="0.7"/>
+    <!-- 嫩芽装饰 -->
+    <path d="M6 12C6 10.5 7 9 8.5 8.5C7.5 10 7 11 7.5 12" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" opacity="0.55"/>
+  </svg>`,
+  // ✅ 护理 — 一双温柔的手捧着一颗带对勾的爱心，象征专业护理
+  check:  `<svg viewBox="0 0 24 24" fill="none">
+    <!-- 爱心（被捧着） -->
+    <path d="M12 19C8.5 15.5 5.5 12.5 4.5 10.5C3.5 8.5 5 7 7 7C8.5 7 10 8 12 10C14 8 15.5 7 17 7C19 7 20.5 8.5 19.5 10.5C18.5 12.5 15.5 15.5 12 19Z" fill="currentColor" opacity="0.32"/>
+    <path d="M12 18.5C9 15.5 6 12.5 5 10.5C4 8.5 5.3 7.3 7 7.3C8.3 7.3 9.8 8.2 12 10C14.2 8.2 15.7 7.3 17 7.3C18.7 7.3 20 8.5 19 10.5C18 12.5 15 15.5 12 18.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+    <!-- 对勾 -->
+    <path d="M8.5 12L10.5 14L15 9.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+    <!-- 左边温柔小手 -->
+    <circle cx="5" cy="15" r="3" fill="currentColor" opacity="0.18"/>
+    <path d="M5.5 15C4 14 3 13 3.5 12" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+    <path d="M7 14C8 13 8.5 13 8.5 13" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+    <!-- 右边温柔小手 -->
+    <circle cx="19" cy="15" r="3" fill="currentColor" opacity="0.18"/>
+    <path d="M18.5 15C20 14 21 13 20.5 12" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+    <path d="M17 14C16 13 15.5 13 15.5 13" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+  </svg>`,
+  // 💌 寄语 — 打开的信封里飘出爱心和星光，一封温柔的祝福信
+  letter: `<svg viewBox="0 0 24 24" fill="none">
+    <!-- 信封下半 -->
+    <path d="M4 11L4 20C4 21 5 22 6.5 22H17.5C19 22 20 21 20 20V11" fill="currentColor" opacity="0.2"/>
+    <path d="M4 11C4 11 4.5 20 4.5 20C4.5 21 5.5 21.5 6.5 21.5H17.5C18.5 21.5 19.5 21 19.5 20C19.5 20 20 11 20 11" stroke="currentColor" stroke-width="1.5"/>
+    <!-- 信封上半（打开的信封盖） -->
+    <path d="M4 11L12 15.5L20 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M4 11L7 6H17L20 11" fill="currentColor" opacity="0.12"/>
+    <path d="M4 11L7 6H17L20 11" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+    <!-- 封口爱心 -->
+    <path d="M12 14C11 13.2 9.5 12.3 9 11.8C8.5 11.3 8.5 10.5 9 10C9.5 9.5 10.5 10 11 10.5C11.5 11 12 12 12 12.5C12 12 12.5 11 13 10.5C13.5 10 14.5 9.5 15 10C15.5 10.5 15.5 11.3 15 11.8C14.5 12.3 13 13.2 12 14Z" fill="currentColor" opacity="0.6"/>
+    <!-- 飘出的爱心 -->
+    <path d="M17 4.5C16.5 4 16 3.5 16.5 3C17 2.5 17.5 3 17.8 3.5C18.1 4 17.7 4.5 17 4.5Z" fill="currentColor" opacity="0.55"/>
+    <!-- 飘出的星光 -->
+    <path d="M14 2.5L14.3 3.5L15.3 3.5L14.3 3.5L14 4.5L13.7 3.5L12.7 3.5L13.7 3.5Z" fill="currentColor" opacity="0.5"/>
+    <path d="M20 3L20.2 3.8L21 3.8L20.2 3.8L20 4.5L19.8 3.8L19 3.8L19.8 3.8Z" fill="currentColor" opacity="0.4"/>
+  </svg>`,
+  // 👑 夸夸 — 软萌皇冠中央嵌着一张胖嘟嘟的笑脸，两侧星光闪耀
+  crown:  `<svg viewBox="0 0 24 24" fill="none">
+    <!-- 皇冠底座 -->
+    <rect x="5" y="17" width="14" height="3.5" rx="1.5" fill="currentColor" opacity="0.28"/>
+    <rect x="5.5" y="17.5" width="13" height="2.5" rx="1.2" stroke="currentColor" stroke-width="1.3"/>
+    <!-- 皇冠顶部尖刺 -->
+    <path d="M5 17L7.5 10L10 14L12 9L14 14L16.5 10L19 17" fill="currentColor" opacity="0.24"/>
+    <path d="M5 17L7.5 10L10 14L12 9L14 14L16.5 10L19 17" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+    <!-- 皇冠中央笑脸 -->
+    <circle cx="12" cy="13" r="3.8" fill="currentColor" opacity="0.28"/>
+    <!-- 眼睛 -->
+    <circle cx="10.8" cy="12.5" r="0.9" fill="currentColor" opacity="0.8"/>
+    <circle cx="13.2" cy="12.5" r="0.9" fill="currentColor" opacity="0.8"/>
+    <!-- 腮红 -->
+    <circle cx="9.5" cy="14" r="1.1" fill="currentColor" opacity="0.25"/>
+    <circle cx="14.5" cy="14" r="1.1" fill="currentColor" opacity="0.25"/>
+    <!-- 微笑 -->
+    <path d="M10.5 14.5C11.2 15.3 12.8 15.3 13.5 14.5" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.7"/>
+    <!-- 左侧星光 -->
+    <path d="M4.5 10L4.8 11L5.8 11L4.8 11L4.5 12L4.2 11L3.2 11L4.2 11Z" fill="currentColor" opacity="0.55"/>
+    <!-- 右侧星光 -->
+    <path d="M19.5 10L19.8 11L20.8 11L19.8 11L19.5 12L19.2 11L18.2 11L19.2 11Z" fill="currentColor" opacity="0.55"/>
+    <!-- 顶部星光 -->
+    <path d="M12 6.5L12.3 7.6L13.3 7.6L12.3 7.6L12 8.7L11.7 7.6L10.7 7.6L11.7 7.6Z" fill="currentColor" opacity="0.65"/>
+  </svg>`,
+  // 🎁 分享 — 礼物盒盖子打开，爱心和星光欢快地蹦出来，蝴蝶结软萌
+  gift:   `<svg viewBox="0 0 24 24" fill="none">
+    <!-- 礼物盒底 -->
+    <rect x="6" y="12" width="12" height="10" rx="2" fill="currentColor" opacity="0.22"/>
+    <rect x="6.5" y="12.5" width="11" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+    <!-- 盒子十字丝带 -->
+    <line x1="12" y1="12.5" x2="12" y2="22" stroke="currentColor" stroke-width="1.4" opacity="0.6"/>
+    <line x1="6.5" y1="16" x2="17.5" y2="16" stroke="currentColor" stroke-width="1.1" opacity="0.5"/>
+    <!-- 礼物盒盖（打开状态） -->
+    <path d="M4 12L12 8L20 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M5 12L7 8H17L19 12" fill="currentColor" opacity="0.15"/>
+    <path d="M5 12L7 8H17L19 12" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+    <!-- 中央蝴蝶结 -->
+    <path d="M9.5 9C8 8 7 5.5 8.5 4.5C10 3.5 11 6 12 8C13 6 14 3.5 15.5 4.5C17 5.5 16 8 14.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="currentColor" fill-opacity="0.28"/>
+    <circle cx="12" cy="7.5" r="2.2" fill="currentColor" opacity="0.38"/>
+    <!-- 蹦出的爱心 -->
+    <path d="M16 3.5C15.5 3 15 2.5 15.5 2C16 1.5 16.5 2 16.8 2.5C17.1 3 16.7 3.5 16 3.5Z" fill="currentColor" opacity="0.6"/>
+    <!-- 蹦出的星光 -->
+    <path d="M10 3L10.3 4L11.3 4L10.3 4L10 5L9.7 4L8.7 4L9.7 4Z" fill="currentColor" opacity="0.55"/>
+    <path d="M14 1.5L14.2 2.3L15.1 2.3L14.2 2.3L14 3L13.8 2.3L12.9 2.3L13.8 2.3Z" fill="currentColor" opacity="0.4"/>
+  </svg>`,
+};
+
+function generate9Grid() {
+  const data = readFormData();
+  // feedAvg & breastRatio 已由 readFormData 自动计算
+  const jN = data.jaundiceEnd <= 12.9;
+  const cordF = data.cordStatus === 'fell';
+  const wA = getWeightAnalogy(data.weightGain);
+  const lA = getLengthAnalogy(parseFloat(data.lengthGain));
+  const fA = getFeedAnalogy(data.feedAvg);
+  const h = function(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); };
+
+  // 数字卡通用模板
+  function numCard(bg, dotBg, dotColor, iconSVG, numStr, unit, label, analogy, context, extraClass) {
+    return `<div class="gc" style="background:${bg}">
+      <span class="gc-star tl" style="color:${dotColor}">✦</span>
+      <span class="gc-star tr" style="color:${dotColor}">·</span>
+      <div class="gc-dot" style="background:${dotBg};color:${dotColor}">${iconSVG}</div>
+      <div class="${extraClass||'gc-num'}" style="color:${dotColor}">${numStr}<span class="gc-unit">${unit}</span></div>
+      <div class="gc-label" style="color:${dotColor}">${label}</div>
+      <div class="gc-line" style="background:${dotColor}"></div>
+      <div class="gc-analogy" style="background:${dotBg};color:${dotColor}">${analogy}</div>
+      <div class="gc-context" style="color:${dotColor}">${context}</div>
+    </div>`;
+  }
+
+  const cards = [
+    // 卡1: 体重增长 - 暖杏色
+    numCard(
+      'linear-gradient(160deg,#FEF5ED,#FDECD8)',
+      '#FDE4CC', '#C88050',
+      icons.scale,
+      `${data.weightGain>=0?'+':''}${data.weightGain}`, 'g',
+      '本周体重增长',
+      wA || '稳步成长中',
+      `当前 ${data.weightEnd}g`
+    ),
+    // 卡2: 喂养 - 鼠尾草绿
+    numCard(
+      'linear-gradient(160deg,#F6FAF3,#E8F2E0)',
+      '#DAECCC', '#6A9068',
+      icons.milk,
+      `${data.feedAvg}`, 'ml',
+      '日均总奶量',
+      fA || '稳定喂养中',
+      data.feedingType==='formula' ? `配方奶量 ${data.formulaMilk}ml · 科学配比` : `母乳占比 ${data.breastRatio}% · 一周全勤`
+    ),
+    // 卡3: 黄疸 - 雾蓝
+    `<div class="gc" style="background:linear-gradient(160deg,#F5F7FC,#E6ECF8)">
+      <span class="gc-star tl" style="color:#7088B8">✦</span>
+      <span class="gc-star tr" style="color:#7088B8">·</span>
+      <div class="gc-dot" style="background:#DCE4F2;color:${jN?'#5A8A60':'#7088B8'}">${jN?icons.check:icons.sun}</div>
+      <div class="gc-num" style="color:${jN?'#5A8A60':'#7088B8'}">${data.jaundiceEnd}</div>
+      <div class="gc-label" style="color:${jN?'#5A8A60':'#7088B8'}">黄疸指数</div>
+      <div class="gc-line" style="background:${jN?'#5A8A60':'#7088B8'}"></div>
+      <div class="gc-analogy" style="background:${jN?'#E0F0E0':'#DCE4F2'};color:${jN?'#5A8A60':'#7088B8'}">${jN?'已降至正常范围 ✓':'持续监测中'}</div>
+      <div class="gc-context" style="color:${jN?'#5A8A60':'#7088B8'}">${data.jaundiceStart} → ${data.jaundiceMid} → ${data.jaundiceEnd}</div>
+    </div>`,
+    // 卡4: 身长 - 蜜桃色
+    parseFloat(data.lengthEnd) > 0
+      ? numCard(
+          'linear-gradient(160deg,#FEF4F0,#FDE4D8)',
+          '#FCD8C8', '#C87058',
+          icons.ruler,
+          `${data.lengthEnd}`, 'cm',
+          '身长变化',
+          parseFloat(data.lengthGain) > 0 ? `+${data.lengthGain}cm${lA?' · '+lA:''}` : '静静长大 · 每厘米都值得等待 🌱',
+          `本周初 ${data.lengthStart}cm`
+        )
+      : `<div class="gc" style="background:linear-gradient(160deg,#FEF4F0,#FDE4D8);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:14px 12px">
+        <span class="gc-star tl" style="color:#C87058">✦</span>
+        <span class="gc-star tr" style="color:#C87058">·</span>
+        <div class="gc-dot" style="background:#FCD8C8;color:#C87058">${icons.ruler}</div>
+        <div style="font-size:17px;color:#C87058;font-weight:700;margin-top:8px;letter-spacing:2px">静静长大</div>
+        <div style="font-size:11px;color:#B88068;text-align:center;line-height:1.7;margin-top:5px">每厘米都值得等待 🌱</div>
+        <div style="font-size:10px;color:#C89878;text-align:center;margin-top:6px;letter-spacing:0.5px">✨ 宝贝有自己的生长节奏</div>
+      </div>`,
+    // 卡5: 宝宝封面 - 温暖奶油 (C位高光)
+    (()=>{
+      // 里程碑拆成单独徽章
+      const msList = data.milestone.split(' · ').filter(m=>m.trim());
+      const msTags = msList.map(m => '<span style="background:linear-gradient(135deg,#fdf0e0,#fce8d0);border:1px solid rgba(200,160,120,.3);border-radius:10px;padding:3px 8px;font-size:10px;color:#C87040;font-weight:600;white-space:nowrap">🎉 '+h(m.trim())+'</span>').join('');
+      const kwTags = data.weekKeywords.split('·').filter(k=>k.trim()).map(k => '<span style="background:rgba(200,150,100,.12);border-radius:8px;padding:2px 6px;font-size:10px;color:#B08060;white-space:nowrap">#'+h(k.trim())+'</span>').join('');
+      return `<div class="gc" style="background:linear-gradient(160deg,#FEF9F2,#FDF0E0,#FCE8D0);padding:12px 12px;display:flex;flex-direction:column;align-items:center;gap:0">
+      <span class="gc-star tl" style="color:#C8A888">✦</span>
+      <span class="gc-star tr" style="color:#C8A888">·</span>
+      <!-- 宝宝插画 -->
+      <div style="width:50px;height:50px;background:#FEFCF8;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(180,150,110,.14);margin-bottom:5px;border:1.5px solid rgba(210,180,150,.2);flex-shrink:0">
+        <svg width="40" height="40" viewBox="0 0 72 72" fill="none">
+          <circle cx="36" cy="36" r="28" fill="#FEF8EE" opacity="0.6"/>
+          <path d="M14 44C14 44 10 32 18 20C26 20 36 28 44 22C52 16 60 22 56 38C52 52 36 56 22 54C18 53 14 48 14 44Z" fill="#FEF3E0" stroke="#E8D0A8" stroke-width="1.6"/>
+          <circle cx="36" cy="33" r="8.5" fill="#FEFCFA" stroke="#E0CEB8" stroke-width="1.3"/>
+          <path d="M29 28.5C30 25 33 23.5 36 23C39 23.5 42 25 43 28.5" stroke="#D0B898" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+          <circle cx="37" cy="24.5" r="0.8" fill="#D0B898" opacity="0.6"/>
+          <path d="M31 32.5C32 34 33.5 34.5 34.5 34" stroke="#C8A888" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+          <path d="M37.5 34C38.5 34.5 40 34 41 32.5" stroke="#C8A888" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+          <ellipse cx="36" cy="35.5" rx="1.3" ry="0.8" fill="#EAD8C8"/>
+          <path d="M34.5 37.5C35.2 38.3 36.8 38.3 37.5 37.5" stroke="#D8B8A0" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+          <circle cx="30.5" cy="35" r="2.8" fill="#F0C8B8" opacity="0.5"/>
+          <circle cx="41.5" cy="35" r="2.8" fill="#F0C8B8" opacity="0.5"/>
+          <path d="M12 16L12.5 17.3L13.8 17.5L12.5 17.7L12 19L11.5 17.7L10.2 17.5L11.5 17.3Z" fill="#F8E0C0" opacity="0.6"/>
+          <path d="M58 14L58.3 14.8L59.2 15L58.3 15.2L58 16L57.7 15.2L56.8 15L57.7 14.8Z" fill="#F8E0C0" opacity="0.45"/>
+          <text x="48" y="23" font-size="7.5" fill="#D8C0A0" opacity="0.55" font-family="serif" font-style="italic">z</text>
+          <text x="54" y="18" font-size="6" fill="#D8C0A0" opacity="0.4" font-family="serif" font-style="italic">z</text>
+        </svg>
+      </div>
+      <div class="gc-name" style="color:#4A3020;font-size:22px;margin-bottom:1px;line-height:1.2">${h(data.babyName)}在橘米</div>
+      <div style="color:#C09060;font-size:13px;font-weight:600;margin-bottom:3px">${data.weekLabel}</div>
+      <!-- 里程碑：独立徽章 -->
+      <div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:center;margin-bottom:4px">
+        ${msTags || '<span style="font-size:10px;color:#C0A888">平稳过渡中 ✨</span>'}
+      </div>
+      <!-- 护理提示 -->
+      <div style="font-size:10px;color:#A08060;margin-bottom:3px;letter-spacing:0.3px">👩⚕️ 每日监测 · 科学记录每一克</div>
+      <!-- 关键词标签 -->
+      <div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:center;margin-bottom:4px">
+        ${kwTags}
+      </div>
+      </div>`;
+    })(),
+    // 卡6: 护理执行 - 薄荷绿
+    `<div class="gc" style="background:linear-gradient(160deg,#F6FAF6,#E8F4EC)">
+      <span class="gc-star tl" style="color:#689878">✦</span>
+      <span class="gc-star tr" style="color:#689878">·</span>
+      <div class="gc-dot" style="background:#D8ECD8;color:#689878">${icons.check}</div>
+      <div class="gc-title" style="color:#487858">本周护理小成就</div>
+      <div class="gc-care-item" style="color:#689878;font-size:12px;line-height:2">
+        每天香喷喷的小澡盆 🛁 ×${data.bathCount}<br>
+        AD补剂一天没落下 💊<br>
+        ${cordF?'脐带顺利毕业啦 🎓':'脐带护理进行中 🤱'}<br>
+        黄疸监测 ×${data.jaundiceChecks}次，一路下降 📉
+      </div>
+    </div>`,
+    // 卡7: 护士寄语 - 奶油
+    `<div class="gc" style="background:linear-gradient(160deg,#FEFAF5,#FEF4E6)">
+      <span class="gc-star tl" style="color:#C8A878">✦</span>
+      <div class="gc-dot" style="background:#FEF0DC;color:#C8A060">${icons.letter}</div>
+      <div class="gc-title" style="color:#8B6840">橘米护理师对你说</div>
+      <div class="gc-text" style="color:#6B4830">${h(data.nurseNote || '宝宝每天都在进步，妈妈放心交给我们～')}</div>
+    </div>`,
+    // 卡8: 妈妈夸夸 - 柔粉
+    `<div class="gc" style="background:linear-gradient(160deg,#FEF6F6,#FDE8E8)">
+      <span class="gc-star tl" style="color:#C88080">✦</span>
+      <div class="gc-dot" style="background:#FDE0DC;color:#C87878">${icons.crown}</div>
+      <div class="gc-title" style="color:#984848">妈妈闪光点</div>
+      <div class="gc-text" style="color:#783838">${h(data.momHighlight || '坚持母乳喂养，每天都在和宝宝一起成长，你是最棒的妈妈！')}</div>
+    </div>`,
+    // 卡9: 分享引导 - 暖金
+    `<div class="gc" style="background:linear-gradient(160deg,#FEFCF6,#FEF6E8,#FDF0D8)">
+      <span class="gc-star tl" style="color:#C8A878">✦</span>
+      <span class="gc-star tr" style="color:#C8A878">·</span>
+      <div class="gc-dot" style="background:#FEF0DC;color:#C89858">${icons.gift}</div>
+      <div style="font-size:13px;color:#8B6840;line-height:1.7;text-align:center;margin-top:2px">
+        记录${h(data.babyName)}的每一周 🌱<br>
+        <b style="color:#C89858;font-size:13px">和宝宝一起慢慢长大</b>
+      </div>
+      <div style="font-size:10px;color:#B89870;letter-spacing:1px;margin-top:6px">科学坐月子 · 从专业护理开始</div>
+      <div class="gc-line" style="background:#C8A878"></div>
+      <div style="font-size:12px;font-weight:600;color:#B89870;letter-spacing:2px">成都橘米母婴中心 📍青羊</div>
+    </div>`,
+  ];
+
+  document.getElementById('grid3x3').innerHTML = cards.join('');
+}
+
+// ===== 收折切换 =====
+function toggleCollapse() {
+  const isCollapsed = document.body.classList.toggle('collapsed');
+  const btn = document.querySelector('.collapse-toggle');
+  if (btn) btn.innerHTML = isCollapsed ? '▶' : '◀';
+  if (isCollapsed) btn.title = '展开表单，继续编辑'; else btn.title = '收起表单，全屏预览';
+}
 </script>
 </body>
 </html>
