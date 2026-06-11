@@ -225,31 +225,31 @@
     flex-shrink: 0;
   }
   .gc .gc-dot svg { width: 25px; height: 25px; }
-  /* 超大数字 */
+  /* 超大数字 — 手机查看需清晰醒目 */
   .gc .gc-num {
-    font-size: 44px; font-weight: 800; line-height: 1;
+    font-size: 48px; font-weight: 800; line-height: 1;
     letter-spacing: -1.5px;
   }
   .gc .gc-num-m {
-    font-size: 52px; font-weight: 800; line-height: 1;
+    font-size: 56px; font-weight: 800; line-height: 1;
     letter-spacing: -1.5px;
   }
   .gc .gc-unit {
-    font-size: 15px; font-weight: 500; opacity: 0.6;
+    font-size: 16px; font-weight: 500; opacity: 0.6;
   }
   /* 主标签 */
   .gc .gc-label {
-    font-size: 13px; font-weight: 600; letter-spacing: 1px;
+    font-size: 14px; font-weight: 600; letter-spacing: 1px;
     margin-top: 6px;
   }
   /* 类比小字 */
   .gc .gc-analogy {
-    font-size: 12px; font-weight: 500; margin-top: 3px;
+    font-size: 12.5px; font-weight: 500; margin-top: 3px;
     padding: 3px 10px; border-radius: 20px;
   }
   /* 底部上下文 */
   .gc .gc-context {
-    font-size: 10.5px; margin-top: 6px; opacity: 0.65;
+    font-size: 11px; margin-top: 6px; opacity: 0.65;
   }
   /* 细装饰线 */
   .gc .gc-line {
@@ -268,17 +268,17 @@
     font-size: 13px; font-weight: 600; opacity: 0.75; margin-top: 10px;
     letter-spacing: 2px;
   }
-  /* 文字卡 */
+  /* 文字卡 — 手机阅读字体略增 */
   .gc .gc-title {
-    font-size: 14px; font-weight: 700; letter-spacing: 0.5px;
+    font-size: 15px; font-weight: 700; letter-spacing: 0.5px;
     margin-bottom: 8px;
   }
   .gc .gc-text {
-    font-size: 13px; line-height: 1.8; max-height: 100px; overflow: hidden;
+    font-size: 13.5px; line-height: 1.8; max-height: 110px; overflow: hidden;
   }
   /* 护理清单 */
   .gc .gc-care-item {
-    font-size: 12px; line-height: 2; font-weight: 500;
+    font-size: 12.5px; line-height: 2; font-weight: 500;
   }
   .gc .gc-care-item .done { opacity: 0.6; }
   /* 装饰小元素 */
@@ -435,12 +435,37 @@
     color: #c87040;
     font-weight: 600;
   }
+  /* ===== 截图按钮 ===== */
+  .btn-screenshot {
+    font-size: 12px;
+    background: #fff;
+    color: #a08060;
+    border: 1px solid #d8d0c8;
+    border-radius: 14px;
+    padding: 5px 14px;
+    cursor: pointer;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: all .2s;
+  }
+  .btn-screenshot:hover { background: #faf5f0; color: #e06030; border-color: #e0c0a0; }
+  .btn-screenshot.saving { background: #e06030; color: #fff; border-color: #e06030; pointer-events: none; }
+  .screenshot-toast {
+    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+    background: rgba(45,24,8,0.85); color: #fff; padding: 10px 28px;
+    border-radius: 20px; font-size: 13px; z-index: 9999;
+    opacity: 0; transition: opacity .3s;
+  }
+  .screenshot-toast.show { opacity: 1; }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </head>
 <body>
 <div class="left-panel" style="position:relative">
   <h2>🍊 宝贝成长周报模板</h2>
   <div style="display:flex;align-items:center;gap:6px;position:absolute;right:36px;top:14px">
+    <button type="button" class="btn-screenshot" id="btnShotLong" onclick="screenshotLong()" title="一键截图长图（发给客户存档）">📷 长图</button>
+    <button type="button" class="btn-screenshot" id="btnShotGrid" onclick="screenshotGrid()" title="一键截图九宫格（发朋友圈）">📷 九宫格</button>
     <button type="button" class="btn-grid" id="btnGrid" onclick="toggleGridMode()" title="切换九宫格朋友圈排版">⬜ 九宫格</button>
   </div>
   <button type="button" class="collapse-toggle" onclick="toggleCollapse()" title="收起表单，全屏预览">◀</button>
@@ -2040,6 +2065,119 @@ function toggleCollapse() {
   const btn = document.querySelector('.collapse-toggle');
   if (btn) btn.innerHTML = isCollapsed ? '▶' : '◀';
   if (isCollapsed) btn.title = '展开表单，继续编辑'; else btn.title = '收起表单，全屏预览';
+}
+
+// ===== 一键截图 =====
+function showToast(msg, duration) {
+  duration = duration || 2000;
+  let t = document.getElementById('screenshotToast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'screenshotToast';
+    t.className = 'screenshot-toast';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function() { t.classList.remove('show'); }, duration);
+}
+
+function screenshotLong() {
+  var wasCollapsed = document.body.classList.contains('collapsed');
+  var wasGrid = document.body.classList.contains('grid-mode');
+  // 确保长图可见
+  document.body.classList.add('collapsed');
+  document.body.classList.remove('grid-mode');
+  var target = document.querySelector('.preview-wrap');
+  if (!target) { showToast('❌ 未找到长图内容'); return; }
+  var btn = document.getElementById('btnShotLong');
+  btn.classList.add('saving'); btn.textContent = '⏳ 生成中...';
+  showToast('📷 正在生成长图，请稍候...');
+  
+  setTimeout(function() {
+    html2canvas(target, {
+      scale: 3,  // 3x 渲染 → 390×3=1170px宽，手机查看清晰锐利
+      useCORS: true,
+      backgroundColor: '#f7f3ed',
+      logging: false,
+      width: target.scrollWidth,
+      height: target.scrollHeight,
+      windowWidth: target.scrollWidth,
+      windowHeight: target.scrollHeight,
+      onclone: function(doc) {
+        // 确保克隆节点内字体渲染完整
+        var cloned = doc.querySelector('.preview-wrap');
+        if (cloned) { cloned.style.transform = 'none'; }
+      }
+    }).then(function(canvas) {
+      // 恢复状态
+      if (!wasCollapsed) document.body.classList.remove('collapsed');
+      if (wasGrid) document.body.classList.add('grid-mode');
+      btn.classList.remove('saving'); btn.textContent = '📷 长图';
+      // 下载
+      var link = document.createElement('a');
+      var name = ($('#babyName').value || '宝宝') + '成长周报_长图';
+      link.download = name + '.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      showToast('✅ 长图已保存！请在下载文件夹查看');
+    }).catch(function(err) {
+      if (!wasCollapsed) document.body.classList.remove('collapsed');
+      if (wasGrid) document.body.classList.add('grid-mode');
+      btn.classList.remove('saving'); btn.textContent = '📷 长图';
+      showToast('❌ 截图失败：' + err.message);
+      console.error(err);
+    });
+  }, 300);
+}
+
+function screenshotGrid() {
+  // 确保九宫格已生成
+  var gridEl = document.getElementById('grid3x3');
+  if (!gridEl || !gridEl.innerHTML.trim()) {
+    generate9Grid();
+  }
+  var wasCollapsed = document.body.classList.contains('collapsed');
+  var wasGrid = document.body.classList.contains('grid-mode');
+  document.body.classList.add('collapsed');
+  document.body.classList.add('grid-mode');
+  document.getElementById('gridEmpty').style.display = 'none';
+  gridEl.style.display = 'grid';
+  
+  var target = document.getElementById('gridContainer');
+  if (!target) { showToast('❌ 未找到九宫格内容'); return; }
+  var btn = document.getElementById('btnShotGrid');
+  btn.classList.add('saving'); btn.textContent = '⏳ 生成中...';
+  showToast('📷 正在生成九宫格，请稍候...');
+  
+  setTimeout(function() {
+    html2canvas(target, {
+      scale: 3,
+      useCORS: true,
+      backgroundColor: '#ffffff',
+      logging: false,
+      width: target.scrollWidth,
+      height: target.scrollHeight,
+      windowWidth: target.scrollWidth,
+      windowHeight: target.scrollHeight
+    }).then(function(canvas) {
+      if (!wasCollapsed) document.body.classList.remove('collapsed');
+      if (!wasGrid) document.body.classList.remove('grid-mode');
+      btn.classList.remove('saving'); btn.textContent = '📷 九宫格';
+      var link = document.createElement('a');
+      var name = ($('#babyName').value || '宝宝') + '成长周报_九宫格';
+      link.download = name + '.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      showToast('✅ 九宫格已保存！请在下载文件夹查看');
+    }).catch(function(err) {
+      if (!wasCollapsed) document.body.classList.remove('collapsed');
+      if (!wasGrid) document.body.classList.remove('grid-mode');
+      btn.classList.remove('saving'); btn.textContent = '📷 九宫格';
+      showToast('❌ 截图失败：' + err.message);
+      console.error(err);
+    });
+  }, 300);
 }
 </script>
 </body>
