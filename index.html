@@ -2119,7 +2119,9 @@ function screenshotLong() {
       btn.classList.remove('saving'); btn.textContent = '📷 长图';
       // 下载
       var link = document.createElement('a');
-      var name = ($('#babyName').value || '宝宝') + '成长周报_长图';
+      var week = $('#weekNum').value || '';
+      var weekStr = week ? '第' + week + '周_' : '';
+      var name = ($('#babyName').value || '宝宝') + '成长' + weekStr + '周报_长图';
       link.download = name + '.png';
       link.href = canvas.toDataURL('image/png');
       link.click();
@@ -2168,7 +2170,9 @@ function screenshotGrid() {
       if (!wasGrid) document.body.classList.remove('grid-mode');
       btn.classList.remove('saving'); btn.textContent = '📷 九宫格';
       var link = document.createElement('a');
-      var name = ($('#babyName').value || '宝宝') + '成长周报_九宫格';
+      var week2 = $('#weekNum').value || '';
+      var weekStr2 = week2 ? '第' + week2 + '周_' : '';
+      var name = ($('#babyName').value || '宝宝') + '成长' + weekStr2 + '周报_九宫格';
       link.download = name + '.png';
       link.href = canvas.toDataURL('image/png');
       link.click();
